@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portal de Notícias
 
-## Getting Started
+Portal de notícias moderno desenvolvido com Next.js 15, TypeScript e Material UI.
 
-First, run the development server:
+## Tecnologias
+
+- **Next.js 15** - Framework React com App Router
+- **TypeScript** - Tipagem estática
+- **Material UI** - Estilização utilitária
+- **Zod** - Validação de schemas
+
+## Instalação
 
 ```bash
+# Instalar dependências
+npm install
+
+# Executar em desenvolvimento
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build para produção
+npm run build
+
+# Executar produção
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse em: [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Estrutura do Projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+portal-noticias/
+├── app/                      # Next.js App Router
+│   ├── layout.tsx           # Layout raiz
+│   ├── page.tsx             # Página inicial
+│   ├── error.tsx            # Error boundary
+│   ├── loading.tsx          # Loading UI
+│   ├── not-found.tsx        # Página 404
+│   ├── news/                # Rotas de notícias
+│   │   └── page.tsx
+│   └── contact/             # Rotas de contato
+│       ├── page.tsx
+│       └── components/
+│           └── contactForm/
+├── components/              # Componentes React reutilizáveis
+│   └── layout/
+│       ├── header/
+│       │   └── index.tsx
+│       └── footer/
+│           └── index.tsx
+├── types/                   # ✨ Types TypeScript
+│   ├── index.ts             # Exports centralizados
+│   ├── news.types.ts        # Tipos de notícias
+│   └── contact.types.ts     # Tipos de contato
+├── schemas/                 # ✨ Validações Zod
+│   ├── news.schema.ts       # Schema de notícias
+│   └── contact.schema.ts    # Schema de contato
+├── infrastructure/          # Camada de dados
+│   └── data/
+│       └── news.ts          # Dados de notícias (27 items)
+└── public/                  # Assets estáticos
+```
 
-## Learn More
+### Organização
 
-To learn more about Next.js, take a look at the following resources:
+**types/** - Types TypeScript (compile-time)
+- Define contratos e interfaces
+- Usado em toda aplicação
+- Import: `import { News } from "@/types"`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**schemas/** - Validações Zod (runtime)
+- Validação de dados em runtime
+- Formulários e APIs
+- Import: `import { ContactFormSchema } from "@/schemas/contact.schema"`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**infrastructure/** - Fonte de dados
+- Dados estáticos tipados
+- Futuro: integração com APIs/CMS
+- Import: `import { noticias } from "@/infrastructure/data/news"`
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Funcionalidades
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- ✅ Listagem de notícias por categoria
+- ✅ Notícias em destaque
+- ✅ Sistema de busca
+- ✅ Formulário de contato com validação
+- ✅ Design responsivo
+- ✅ SEO otimizado
+- ✅ Type-safe com TypeScript
