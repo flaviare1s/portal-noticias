@@ -14,19 +14,20 @@ import {
   ListItemText,
   Stack,
 } from '@mui/material';
+import NextLink from "next/link";
 
 const menuItems = [
-  'Home',
-  'News',
-  'FAQ',
-  'Contato',
-  'Ao vivo',
-  'Política',
-  'Money',
-  'Mundo',
-  'Agro',
-  'Esportes',
-  'Viagem & Gastronomia',
+  { label: 'Home', href: '/' },
+  { label: 'News', href: '/news' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Contato', href: '/contact' },
+  { label: 'Ao vivo', href: '#' },
+  { label: 'Política', href: '#' },
+  { label: 'Money', href: '#' },
+  { label: 'Mundo', href: '#' },
+  { label: 'Agro', href: '#' },
+  { label: 'Esportes', href: '#' },
+  { label: 'Viagem & Gastronomia', href: '#' },
 ];
 
 const MobileMenu = () => {
@@ -103,24 +104,26 @@ const MobileMenu = () => {
         <List sx={{ px: 1, py: 2 }}>
           {menuItems.map((item) => (
             <ListItemButton
-              key={item}
+              key={item.label}
+              component={NextLink}
+              href={item.href}
               onClick={toggleDrawer(false)}
               sx={{
                 borderRadius: 2,
                 mb: 0.5,
               }}
             >
-              {item === 'Ao vivo' && (
+              {item.label === 'Ao vivo' && (
                 <LiveTvOutlinedIcon sx={{ mr: 1.5, fontSize: 20 }} />
               )}
 
               <ListItemText
-                primary={item}
+                primary={item.label}
                 slotProps={{
                   primary: {
                     fontSize: '1rem',
-                    fontWeight: item === 'Contato' ? 700 : 500,
-                    fontFamily: ['Home', 'News', 'FAQ', 'Contato'].includes(item) ? 'var(--font-roboto)' : undefined,
+                    fontWeight: item.label === 'Contato' ? 700 : 500,
+                    fontFamily: ['Home', 'News', 'FAQ', 'Contato'].includes(item.label) ? 'var(--font-roboto)' : undefined,
                   },
                 }}
               />

@@ -4,16 +4,17 @@ import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
 import {
   Box,
   IconButton,
-  Link,
+  Link as MuiLink,
   Stack,
   Typography,
 } from '@mui/material';
+import NextLink from "next/link";
 
 const primaryLinks = [
-  'Home',
-  'News',
-  'FAQ',
-  'Contato',
+  { label: 'Home', href: '/' },
+  { label: 'News', href: '/news' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Contato', href: '/contact' },
 ];
 
 const secondaryLinks = [
@@ -45,14 +46,15 @@ const DesktopNavbar = () => {
         sx={{ mr: 4 }}
       >
         {primaryLinks.map((item) => (
-          <Link
-            key={item}
-            href="#"
+          <MuiLink
+            key={item.label}
+            component={NextLink}
+            href={item.href}
             underline="none"
             color="inherit"
             sx={{
               fontSize: '0.95rem',
-              fontWeight: item === 'Contato' ? 700 : 500,
+              fontWeight: item.label === 'Contato' ? 700 : 500,
               fontFamily: 'var(--font-roboto)',
               color: '#FFF',
               transition: 'opacity 0.2s ease',
@@ -61,8 +63,8 @@ const DesktopNavbar = () => {
               },
             }}
           >
-            {item}
-          </Link>
+            {item.label}
+          </MuiLink>
         ))}
       </Stack>
 
@@ -101,14 +103,15 @@ const DesktopNavbar = () => {
               <LiveTvOutlinedIcon sx={{ fontSize: 18, color: '#FFF' }} />
             )}
 
-            <Typography
-              component="a"
+            <MuiLink
+              component={NextLink}
               href="#"
+              underline="none"
               sx={{
-                textDecoration: 'none',
                 color: '#FFF',
                 fontSize: '0.95rem',
                 fontWeight: 500,
+                fontFamily: 'roboto',
                 transition: 'opacity 0.2s ease',
                 '&:hover': {
                   opacity: 0.75,
@@ -116,7 +119,7 @@ const DesktopNavbar = () => {
               }}
             >
               {item}
-            </Typography>
+            </MuiLink>
           </Box>
         ))}
       </Stack>
