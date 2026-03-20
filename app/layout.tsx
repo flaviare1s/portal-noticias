@@ -33,9 +33,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} h-full antialiased`}
       suppressHydrationWarning
+      style={{ margin: 0, padding: 0 }}
     >
-      <Header />
-      <body className="min-h-full flex flex-col m-0 p-0" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col" style={{ margin: 0, padding: 0 }} suppressHydrationWarning>
+        <Header />
         {children}
       </body>
     </html>
