@@ -1,0 +1,135 @@
+import { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import MenuIcon from '@mui/icons-material/Menu';
+import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemText,
+  Stack,
+} from '@mui/material';
+
+const menuItems = [
+  'Home',
+  'News',
+  'FAQ',
+  'Contato',
+  'Ao vivo',
+  'Política',
+  'Money',
+  'Mundo',
+  'Agro',
+  'Esportes',
+  'Viagem & Gastronomia',
+];
+
+const MobileMenu = () => {
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (value: boolean) => () => {
+    setOpen(value);
+  };
+
+  return (
+    <>
+      <Stack direction="row" spacing={1} alignItems="center">
+        <IconButton
+          aria-label="search"
+          sx={{
+            color: '#FFF',
+          }}
+        >
+          <SearchIcon sx={{ fontSize: 34 }} />
+        </IconButton>
+
+        <IconButton
+          aria-label="account"
+          sx={{
+            color: '#FFF',
+          }}
+        >
+          <PersonOutlineIcon sx={{ fontSize: 34 }} />
+        </IconButton>
+
+        <IconButton
+          aria-label="open menu"
+          onClick={toggleDrawer(true)}
+          sx={{
+            color: '#FFF',
+          }}
+        >
+          <MenuIcon sx={{ fontSize: 40 }} />
+        </IconButton>
+      </Stack>
+
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={toggleDrawer(false)}
+        slotProps={{
+          paper: {
+            sx: {
+              width: 320,
+              backgroundColor: '#000',
+              color: '#FFF',
+            },
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            p: 2,
+          }}
+        >
+          <IconButton
+            aria-label="close menu"
+            onClick={toggleDrawer(false)}
+            sx={{ color: '#FFF' }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Box>
+
+        <Divider sx={{ borderColor: '#1F1F1F' }} />
+
+        <List sx={{ px: 1, py: 2 }}>
+          {menuItems.map((item) => (
+            <ListItemButton
+              key={item}
+              onClick={toggleDrawer(false)}
+              sx={{
+                borderRadius: 2,
+                mb: 0.5,
+              }}
+            >
+              {item === 'Ao vivo' && (
+                <LiveTvOutlinedIcon sx={{ mr: 1.5, fontSize: 20 }} />
+              )}
+
+              <ListItemText
+                primary={item}
+                slotProps={{
+                  primary: {
+                    fontSize: '1rem',
+                    fontWeight: item === 'Contato' ? 700 : 500,
+                    fontFamily: ['Home', 'News', 'FAQ', 'Contato'].includes(item) ? 'var(--font-roboto)' : undefined,
+                  },
+                }}
+              />
+            </ListItemButton>
+          ))}
+        </List>
+      </Drawer>
+    </>
+  );
+};
+
+export default MobileMenu;
