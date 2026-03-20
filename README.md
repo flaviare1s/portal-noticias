@@ -49,11 +49,11 @@ portal-noticias/
 │       │   └── index.tsx
 │       └── footer/
 │           └── index.tsx
-├── types/                   # ✨ Types TypeScript
+├── types/                   # Types TypeScript
 │   ├── index.ts             # Exports centralizados
 │   ├── news.types.ts        # Tipos de notícias
 │   └── contact.types.ts     # Tipos de contato
-├── schemas/                 # ✨ Validações Zod
+├── schemas/                 # Validações Zod
 │   ├── news.schema.ts       # Schema de notícias
 │   └── contact.schema.ts    # Schema de contato
 ├── infrastructure/          # Camada de dados
