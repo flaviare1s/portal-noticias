@@ -87,7 +87,7 @@ const MobileMenu = () => {
           sx={{
             display: 'flex',
             justifyContent: 'flex-end',
-            p: 2.8,
+            p: 2.4,
           }}
         >
           <IconButton
