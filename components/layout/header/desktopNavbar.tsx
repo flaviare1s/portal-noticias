@@ -111,15 +111,15 @@ const DesktopNavbar = () => {
             }}
           >
             {item === 'Ao Vivo' && (
-              <LiveTvOutlinedIcon sx={{ fontSize: 18, color: '#FFF' }} />
+              <LiveTvOutlinedIcon sx={{ fontSize: 18, color: '#FFF', marginBottom: .3 }} />
             )}
 
             <MuiLink
               component={NextLink}
-              href="#"
+              href={item === "Ao Vivo" ? "/live" : "#"}
               underline="none"
               sx={{
-                color: '#FFF',
+                color: pathname === "/live" && item === "Ao Vivo" ? "#E3194B" : "#FFF",
                 fontSize: '0.95rem',
                 fontWeight: 500,
                 fontFamily: 'roboto',
