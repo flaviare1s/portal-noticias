@@ -1,7 +1,7 @@
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import Nav from "@/components/layout/nav";
-import { Box } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
@@ -25,6 +25,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${roboto.variable} h-full antialiased`}
+      style={{ width: "100%", overflowX: "hidden" }}
       suppressHydrationWarning
     >
       <body
@@ -38,6 +39,7 @@ export default function RootLayout({
         }}
         suppressHydrationWarning
       >
+        <CssBaseline />
         <Header />
         <Nav />
         <main style={{ flexGrow: 1 }}>
