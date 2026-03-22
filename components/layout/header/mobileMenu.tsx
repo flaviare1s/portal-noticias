@@ -21,7 +21,7 @@ import NextLink from "next/link";
 
 const menuItems = [
   { label: 'Home', href: '/' },
-  { label: 'News', href: '/news' },
+  { label: 'Notícias', href: '/news' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contato', href: '/contact' },
   { label: 'Ao vivo', href: '#' },

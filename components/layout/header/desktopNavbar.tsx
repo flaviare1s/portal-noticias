@@ -15,7 +15,7 @@ import { useSearch } from "@/components/search/SearchContext";
 
 const primaryLinks = [
   { label: 'Home', href: '/' },
-  { label: 'News', href: '/news' },
+  { label: 'Notícias', href: '/news' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contato', href: '/contact' },
 ];
@@ -104,10 +104,7 @@ const DesktopNavbar = () => {
           <Box
             key={item}
             sx={{
-              display: {
-                xs: "none",
-                xl: "flex",
-              },
+              display: "flex",
               alignItems: 'center',
               gap: 0.75,
               whiteSpace: 'nowrap',
