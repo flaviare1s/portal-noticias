@@ -41,43 +41,54 @@ export default function FaqPage() {
         px: { xs: 3, sm: 4, md: 6 },
       }}
     >
-        <Typography variant="h1" sx={{ fontSize: 25, marginBottom: 3 }}>Perguntas Frequentes</Typography>
+      <Typography
+        component="h1"
+        sx={{
+          color: "#1F1F1F",
+          fontWeight: 800,
+          fontSize: { xs: "2.25rem", sm: "2.5rem", md: "2.1rem" },
+          lineHeight: 1.1,
+          mb: { xs: 3, md: 2 },
+        }}
+      >
+        Perguntas Frequentes
+      </Typography>
 
-        <Box>
-          {faqItems.map((item, index) => (
-            <Accordion
-              key={index}
-              disableGutters
+      <Box>
+        {faqItems.map((item, index) => (
+          <Accordion
+            key={index}
+            disableGutters
+            sx={{
+              backgroundColor: "transparent",
+              color: "inherit",
+              borderBottom: "1px solid",
+              borderColor: "divider",
+              boxShadow: "none",
+              "&:before": { display: "none" },
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
               sx={{
-                backgroundColor: "transparent",
-                color: "inherit",
-                borderBottom: "1px solid",
-                borderColor: "divider",
-                boxShadow: "none",
-                "&:before": { display: "none" },
+                px: 0,
+                "& .MuiAccordionSummary-content": {
+                  margin: "12px 0",
+                },
               }}
             >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                sx={{
-                  px: 0,
-                  "& .MuiAccordionSummary-content": {
-                    margin: "12px 0",
-                  },
-                }}
-              >
-                <Typography className="text-lg font-semibold">
-                  {item.question}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails sx={{ px: 0, pb: 3 }}>
-                <Typography className="text-base text-gray-600 dark:text-gray-300">
-                  {item.answer}
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          ))}
-        </Box>
-      </Container>
+              <Typography className="text-lg font-semibold">
+                {item.question}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails sx={{ px: 0, pb: 3 }}>
+              <Typography className="text-base text-gray-600 dark:text-gray-300">
+                {item.answer}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </Box>
+    </Container>
   );
 }
