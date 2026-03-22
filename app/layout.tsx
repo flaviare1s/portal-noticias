@@ -1,10 +1,12 @@
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
+import Nav from "@/components/layout/nav";
+import { Box } from "@mui/material";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: ['400', '500', '700'],
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
   variable: "--font-roboto",
 });
@@ -31,13 +33,23 @@ export default function RootLayout({
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
+          backgroundColor: "#ECECEC",
+          
         }}
         suppressHydrationWarning
       >
         <Header />
-
+        <Nav />
         <main style={{ flexGrow: 1 }}>
-          {children}
+          <Box
+            component="section"
+            sx={{
+              width: "100%",
+              py: 1,
+            }}
+          >
+            {children}
+          </Box>
         </main>
 
         <Footer />
