@@ -5,12 +5,14 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import {
+  Alert,
   Box,
   Breadcrumbs,
   Button,
   Container,
   InputAdornment,
   Link,
+  Snackbar,
   TextField,
   Typography,
 } from '@mui/material';
@@ -26,6 +28,7 @@ const ContactForm = () => {
   const [errors, setErrors] = useState<
     Partial<Record<keyof ContactFormInput, string>>
   >({});
+  const [openToast, setOpenToast] = useState(false);
 
   const handleChange =
     (field: keyof ContactFormInput) =>
@@ -58,7 +61,13 @@ const ContactForm = () => {
     }
 
     setErrors({});
-    console.log('Form válido:', result.data);
+    setOpenToast(true);
+
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+    });
   };
 
   return (
@@ -334,6 +343,23 @@ const ContactForm = () => {
             </Button>
           </Box>
         </Box>
+
+        <Snackbar
+          open={openToast}
+          autoHideDuration={4000}
+          onClose={() => setOpenToast(false)}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        >
+          <Alert
+            onClose={() => setOpenToast(false)}
+            severity="success"
+            variant="filled"
+            sx={{ width: '100%' }}
+          >
+            Mensagem enviada com sucesso!
+          </Alert>
+        </Snackbar>
+
       </Container>
     </Box>
   );
