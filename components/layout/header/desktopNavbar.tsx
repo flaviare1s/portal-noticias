@@ -6,7 +6,6 @@ import {
   IconButton,
   Link as MuiLink,
   Stack,
-  Typography,
 } from '@mui/material';
 import NextLink from "next/link";
 
