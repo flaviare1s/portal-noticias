@@ -13,6 +13,7 @@ import {
   ListItemButton,
   ListItemText,
   Stack,
+  Link as MuiLink
 } from '@mui/material';
 import NextLink from "next/link";
 
@@ -49,6 +50,10 @@ const MobileMenu = () => {
           <SearchIcon sx={{ fontSize: 24 }} />
         </IconButton>
 
+        <MuiLink 
+          component={NextLink}
+          href='/profile'
+          >
         <IconButton
           aria-label="account"
           sx={{
@@ -57,6 +62,7 @@ const MobileMenu = () => {
         >
           <PersonOutlineIcon sx={{ fontSize: 24 }} />
         </IconButton>
+        </MuiLink>
 
         <IconButton
           aria-label="open menu"

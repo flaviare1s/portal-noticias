@@ -10,6 +10,7 @@ const routeNameMap: Record<string, string> = {
   news: "Notícias",
   faq: "FAQ",
   contact: "Contato",
+  profile: "Perfil"
 };
 
 const Nav = () => {

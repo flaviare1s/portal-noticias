@@ -1,7 +1,8 @@
 'use client'
-import { AppBar, Box, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography, useMediaQuery, useTheme, Link as MuiLink } from '@mui/material';
 import DesktopNavbar from './desktopNavbar';
 import MobileMenu from './mobileMenu';
+import NextLink from "next/link";
 
 const Header = () => {
   const theme = useTheme();
@@ -26,40 +27,45 @@ const Header = () => {
           justifyContent: 'space-between',
         }}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            flexShrink: 0,
-          }}
+        <MuiLink
+          component={NextLink}
+          href='/'
+          underline='none'
         >
-          <Typography
-            component="span"
+          <Box
             sx={{
-              color: '#FFF',
-              fontWeight: 800,
-              fontSize: { xs: '1.3rem', sm: '2rem' },
-              lineHeight: 1,
-              letterSpacing: '-0.02em',
-              mr: 1.5,
+              display: 'flex',
+              alignItems: 'center',
+              flexShrink: 0,
             }}
           >
-            PORTAL
-          </Typography>
-
-          <Typography
-            component="span"
-            sx={{
-              color: '#E3194B',
-              fontWeight: 800,
-              fontSize: { xs: '1.3rem', sm: '2rem' },
-              lineHeight: 1,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            NOTÍCIAS
-          </Typography>
-        </Box>
+            <Typography
+              component="span"
+              sx={{
+                color: '#FFF',
+                fontWeight: 800,
+                fontSize: { xs: '1.3rem', sm: '2rem' },
+                lineHeight: 1,
+                letterSpacing: '-0.02em',
+                mr: 1.5,
+              }}
+            >
+              PORTAL
+            </Typography>
+            <Typography
+              component="span"
+              sx={{
+                color: '#E3194B',
+                fontWeight: 800,
+                fontSize: { xs: '1.3rem', sm: '2rem' },
+                lineHeight: 1,
+                letterSpacing: '-0.02em',
+              }}
+            >
+              NOTÍCIAS
+            </Typography>
+          </Box>
+        </MuiLink>
 
         {isDesktop ? <DesktopNavbar /> : <MobileMenu />}
       </Toolbar>

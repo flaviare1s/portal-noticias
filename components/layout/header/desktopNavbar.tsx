@@ -136,14 +136,19 @@ const DesktopNavbar = () => {
           <SearchIcon />
         </IconButton>
 
-        <IconButton
-          aria-label="account"
-          sx={{
-            color: '#FFF',
-          }}
-        >
-          <PersonOutlineIcon />
-        </IconButton>
+        <MuiLink 
+          component={NextLink}
+          href='/profile'
+          >
+          <IconButton
+            aria-label="account"
+            sx={{
+              color: '#FFF',
+            }}
+          >
+            <PersonOutlineIcon />
+          </IconButton>
+        </MuiLink>
       </Stack>
     </Box>
   );
