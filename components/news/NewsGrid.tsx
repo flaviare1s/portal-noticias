@@ -7,9 +7,10 @@ import { useSearch } from "@/components/search/SearchContext";
 
 type NewsGridProps = {
   limit?: number;
+  variant?: "home" | "news";
 };
 
-export const NewsGrid = ({ limit }: NewsGridProps) => {
+export const NewsGrid = ({ limit, variant = "news" }: NewsGridProps) => {
   const { results, query } = useSearch();
 
   const source = query.trim() ? results : noticias;
@@ -18,30 +19,52 @@ export const NewsGrid = ({ limit }: NewsGridProps) => {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: {xs: '100%', lg: '85%', xl: '70%'},
+        margin: 'auto',
         display: "grid",
         gap: { xs: 2, md: 3 },
-        padding: { xs: 2, md: 3, lg: 6},
+        padding: { xs: 2, md: 3, lg: 6 },
         gridTemplateColumns: {
           xs: "1fr",
           sm: "repeat(2, 1fr)",
-          md: "repeat(3, 1fr)",
-          lg: "repeat(4, 1fr)",
+          md:
+            variant === "news"
+              ? "repeat(3, 1fr)"
+              : "repeat(6, 1fr)",
         },
       }}
     >
-      {data.map((item) => (
-        <NewsCard
-          key={item.slug}
-          slug={item.slug}
-          title={item.title}
-          excerpt={item.excerpt}
-          category={item.category}
-          imageUrl={item.imageUrl}
-          imageAlt={item.imageAlt}
-          date={item.date}
-        />
-      ))}
+      {data.map((item, index) => {
+        const gridColumnDesktop =
+          variant === "home"
+            ? index === 0
+              ? "span 6"        // 1ª linha inteira
+              : index === 1 || index === 2
+              ? "span 3"        // 2ª linha com 2 notícias
+              : "span 2"        // a partir da 3ª linha → 3 por linha
+            : "span 1";
+
+        return (
+          <Box
+            key={item.slug}
+            sx={{
+              gridColumn: {
+                md: gridColumnDesktop,
+              },
+            }}
+          >
+            <NewsCard
+              slug={item.slug}
+              title={item.title}
+              excerpt={item.excerpt}
+              category={item.category}
+              imageUrl={item.imageUrl}
+              imageAlt={item.imageAlt}
+              date={item.date}
+            />
+          </Box>
+        );
+      })}
     </Box>
   );
 };

@@ -3,7 +3,7 @@ import { NewsGrid } from "@/components/news/NewsGrid";
 export default function Home() {
   return (
     <>
-      <NewsGrid />
+      <NewsGrid variant="home" />
     </>
   );
 }
