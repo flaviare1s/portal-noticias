@@ -61,6 +61,9 @@ const ContactForm = () => {
     }
 
     setErrors({});
+
+    console.log('Dados enviados do formulário:', result.data);
+
     setOpenToast(true);
 
     setFormData({
