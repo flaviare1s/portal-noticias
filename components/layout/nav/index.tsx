@@ -20,22 +20,35 @@ const Nav = () => {
 
   const segments = pathname.split("/").filter(Boolean);
 
-  const breadcrumbs = segments.map((segment, index) => {
-    const href = "/" + segments.slice(0, index + 1).join("/");
-    let label = routeNameMap[segment] ?? segment;
+  const breadcrumbs = segments
+    .filter((segment) => segment !== "category")
+    .map((segment, index, filteredSegments) => {
+      const href =
+        "/" + filteredSegments.slice(0, index + 1).join("/");
 
-    if (segments[index - 1] === "news") {
-      const noticia = noticias.find((item) => item.slug === segment);
-      if (noticia) {
-        label = noticia.title;
+      let label = routeNameMap[segment] ?? decodeURIComponent(segment);
+
+      // Se for detalhe de notícia
+      if (filteredSegments[index - 1] === "news") {
+        const noticia = noticias.find((item) => item.slug === segment);
+        if (noticia) {
+          label = noticia.title;
+        }
       }
-    }
 
-    return {
-      href,
-      label,
-    };
-  });
+      // Se for página de categoria
+      if (
+        filteredSegments[index - 1] === "news" &&
+        !noticias.find((item) => item.slug === segment)
+      ) {
+        label = decodeURIComponent(segment);
+      }
+
+      return {
+        href,
+        label,
+      };
+    });
 
   return (
     <Box
