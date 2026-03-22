@@ -8,13 +8,14 @@ import { useSearch } from "@/components/search/SearchContext";
 type NewsGridProps = {
   limit?: number;
   variant?: "home" | "news";
+  items?: typeof noticias;
 };
 
-export const NewsGrid = ({ limit, variant = "news" }: NewsGridProps) => {
+export const NewsGrid = ({ limit, variant = "news", items }: NewsGridProps) => {
   const { results, query } = useSearch();
 
-  const source = query.trim() ? results : noticias;
-  const data = limit ? source.slice(0, limit) : source;
+  const baseSource = items ?? (query.trim() ? results : noticias);
+  const data = limit ? baseSource.slice(0, limit) : baseSource;
 
   return (
     <Box
