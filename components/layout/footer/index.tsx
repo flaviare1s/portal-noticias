@@ -30,7 +30,7 @@ const Footer = () => {
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: { xs: 4, md: 2 },
+          gap: { xs: 6, md: 2 },
           textAlign: { xs: 'center', md: 'left' },
         }}
       >
