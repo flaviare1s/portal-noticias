@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
@@ -13,8 +14,53 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { ContactFormSchema, type ContactFormInput } from '@/schemas/contact.schema';
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState<ContactFormInput>({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof ContactFormInput, string>>
+  >({});
+
+  const handleChange =
+    (field: keyof ContactFormInput) =>
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData((prev) => ({
+        ...prev,
+        [field]: event.target.value,
+      }));
+    };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const result = ContactFormSchema.safeParse(formData);
+
+    if (!result.success) {
+      const fieldErrors: Partial<
+        Record<keyof ContactFormInput, string>
+      > = {};
+
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as keyof ContactFormInput;
+        if (field) {
+          fieldErrors[field] = issue.message;
+        }
+      });
+
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setErrors({});
+    console.log('Form válido:', result.data);
+  };
+
   return (
     <Box
       component="section"
@@ -89,10 +135,11 @@ const ContactForm = () => {
         <Box
           component="form"
           noValidate
+          onSubmit={handleSubmit}
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            gap: 2.5,
+            gap: { xs: 3, md: 2.5 },
             maxWidth: 560,
           }}
         >
@@ -100,6 +147,10 @@ const ContactForm = () => {
             fullWidth
             variant="outlined"
             label="Nome *"
+            value={formData.name}
+            onChange={handleChange('name')}
+            error={!!errors.name}
+            helperText={errors.name}
             placeholder=""
             slotProps={{
               input: {
@@ -148,6 +199,10 @@ const ContactForm = () => {
             fullWidth
             variant="outlined"
             label="E-mail *"
+            value={formData.email}
+            onChange={handleChange('email')}
+            error={!!errors.email}
+            helperText={errors.email}
             placeholder=""
             slotProps={{
               input: {
@@ -197,6 +252,10 @@ const ContactForm = () => {
             minRows={5}
             variant="outlined"
             label="Mensagem *"
+            value={formData.message}
+            onChange={handleChange('message')}
+            error={!!errors.message}
+            helperText={errors.message}
             placeholder=""
             slotProps={{
               input: {
