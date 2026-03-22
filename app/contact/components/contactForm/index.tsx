@@ -67,7 +67,7 @@ const ContactForm = () => {
       sx={{
         width: '100%',
         backgroundColor: '#ECECEC',
-        py: { xs: 3, md: 7 },
+        py: 6,
       }}
     >
       <Container
@@ -123,9 +123,9 @@ const ContactForm = () => {
         <Typography
           sx={{
             color: '#666666',
-            fontSize: { xs: '1.15rem', sm: '1.3rem', md: '1.05rem' },
+            fontSize: { xs: '1.1rem', md: '1.05rem' },
             lineHeight: 1.5,
-            maxWidth: 760,
+            maxWidth: '100%',
             mb: 3,
           }}
         >
@@ -139,8 +139,8 @@ const ContactForm = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            gap: { xs: 3, md: 2.5 },
-            maxWidth: 560,
+            gap: 3,
+            width: '100%',
           }}
         >
           <TextField
