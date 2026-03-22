@@ -5,7 +5,7 @@ import MobileMenu from './mobileMenu';
 
 const Header = () => {
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <AppBar
@@ -38,7 +38,7 @@ const Header = () => {
             sx={{
               color: '#FFF',
               fontWeight: 800,
-              fontSize: { xs: '1.7rem', md: '2rem' },
+              fontSize: { xs: '1.3rem', sm: '2rem' },
               lineHeight: 1,
               letterSpacing: '-0.02em',
               mr: 1.5,
@@ -52,7 +52,7 @@ const Header = () => {
             sx={{
               color: '#E3194B',
               fontWeight: 800,
-              fontSize: { xs: '1.7rem', md: '2rem' },
+              fontSize: { xs: '1.3rem', sm: '2rem' },
               lineHeight: 1,
               letterSpacing: '-0.02em',
             }}

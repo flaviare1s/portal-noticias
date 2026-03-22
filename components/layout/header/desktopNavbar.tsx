@@ -92,7 +92,10 @@ const DesktopNavbar = () => {
           <Box
             key={item}
             sx={{
-              display: 'flex',
+              display: {
+                xs: "none",
+                xl: "flex",
+              },
               alignItems: 'center',
               gap: 0.75,
               whiteSpace: 'nowrap',

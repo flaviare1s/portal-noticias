@@ -46,7 +46,7 @@ const MobileMenu = () => {
             color: '#FFF',
           }}
         >
-          <SearchIcon sx={{ fontSize: 34 }} />
+          <SearchIcon sx={{ fontSize: 24 }} />
         </IconButton>
 
         <IconButton
@@ -55,7 +55,7 @@ const MobileMenu = () => {
             color: '#FFF',
           }}
         >
-          <PersonOutlineIcon sx={{ fontSize: 34 }} />
+          <PersonOutlineIcon sx={{ fontSize: 24 }} />
         </IconButton>
 
         <IconButton
@@ -65,7 +65,7 @@ const MobileMenu = () => {
             color: '#FFF',
           }}
         >
-          <MenuIcon sx={{ fontSize: 40 }} />
+          <MenuIcon sx={{ fontSize: 30 }} />
         </IconButton>
       </Stack>
 
@@ -87,7 +87,7 @@ const MobileMenu = () => {
           sx={{
             display: 'flex',
             justifyContent: 'flex-end',
-            p: 1.8,
+            p: 2.8,
           }}
         >
           <IconButton
@@ -95,7 +95,7 @@ const MobileMenu = () => {
             onClick={toggleDrawer(false)}
             sx={{ color: '#FFF' }}
           >
-            <CloseIcon sx={{  fontSize: 40 }} />
+            <CloseIcon sx={{  fontSize: 30 }} />
           </IconButton>
         </Box>
 
