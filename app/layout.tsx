@@ -34,7 +34,7 @@ export default function RootLayout({
           display: "flex",
           flexDirection: "column",
           backgroundColor: "#ECECEC",
-          
+          overflowX: "hidden",
         }}
         suppressHydrationWarning
       >
