@@ -87,7 +87,7 @@ const MobileMenu = () => {
           sx={{
             display: 'flex',
             justifyContent: 'flex-end',
-            p: 2,
+            p: 1.8,
           }}
         >
           <IconButton
@@ -95,7 +95,7 @@ const MobileMenu = () => {
             onClick={toggleDrawer(false)}
             sx={{ color: '#FFF' }}
           >
-            <CloseIcon />
+            <CloseIcon sx={{  fontSize: 40 }} />
           </IconButton>
         </Box>
 
