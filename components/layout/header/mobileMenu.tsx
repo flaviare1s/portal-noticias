@@ -25,12 +25,12 @@ const menuItems = [
   { label: 'FAQ', href: '/faq' },
   { label: 'Contato', href: '/contact' },
   { label: 'Ao vivo', href: '/live' },
-  { label: 'Política', href: '#' },
-  { label: 'Money', href: '#' },
-  { label: 'Mundo', href: '#' },
-  { label: 'Agro', href: '#' },
-  { label: 'Esportes', href: '#' },
-  { label: 'Viagem & Gastronomia', href: '#' },
+  { label: 'Política', href: `/news/category/Política` },
+  { label: 'Money', href: `/news/category/Money` },
+  { label: 'Mundo', href: `/news/category/Mundo` },
+  { label: 'Agro', href: `/news/category/Agro` },
+  { label: 'Esportes', href: `/news/category/Esportes` },
+  { label: 'Viagem & Gastronomia', href: `/news/category/Viagem & Gastronomia` },
 ];
 
 const MobileMenu = () => {

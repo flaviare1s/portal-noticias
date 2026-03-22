@@ -13,9 +13,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
 
-  const categories = Array.from(
-    new Set(noticias.map((item) => item.category))
-  );
+  const categories = Array.from(new Set(noticias.map((item) => item.category)));
 
   const filteredNews = noticias.filter(
     (news) => news.category === decodedCategory,
@@ -86,7 +84,40 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </Box>
       </Container>
 
-      <NewsGrid items={filteredNews} variant="news" />
+      {filteredNews.length > 0 ? (
+        <NewsGrid items={filteredNews} variant="news" />
+      ) : (
+        <Box
+          sx={{
+            mt: 6,
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 700,
+              color: "#1F1F1F",
+            }}
+          >
+            Nenhuma notícia encontrada
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{
+              color: "#666",
+              maxWidth: 400,
+            }}
+          >
+            Não há notícias disponíveis para essa categoria no momento.
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 }

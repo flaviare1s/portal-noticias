@@ -116,10 +116,17 @@ const DesktopNavbar = () => {
 
             <MuiLink
               component={NextLink}
-              href={item === "Ao Vivo" ? "/live" : "#"}
+              href={
+                item === "Ao Vivo"
+                  ? "/live"
+                  : `/news/category/${(item)}`
+              }
               underline="none"
               sx={{
-                color: pathname === "/live" && item === "Ao Vivo" ? "#E3194B" : "#FFF",
+                color:
+                  item === "Ao Vivo" && pathname === "/live"
+                    ? "#E3194B"
+                    : "#FFF",
                 fontSize: '0.95rem',
                 fontWeight: 500,
                 fontFamily: 'roboto',
