@@ -24,7 +24,7 @@ const menuItems = [
   { label: 'Notícias', href: '/news' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contato', href: '/contact' },
-  { label: 'Ao vivo', href: '#' },
+  { label: 'Ao vivo', href: '/live' },
   { label: 'Política', href: '#' },
   { label: 'Money', href: '#' },
   { label: 'Mundo', href: '#' },
