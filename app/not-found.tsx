@@ -18,7 +18,7 @@ export default function NotFound() {
           gap: 3,
         }}
       >
-        <ErrorOutlineIcon sx={{ fontSize: 100, color: "error.main" }} />
+        <ErrorOutlineIcon sx={{ fontSize: 100, color: "#E3194B" }} />
         
         <Typography variant="h1" component="h1" fontWeight="bold">
           404
@@ -37,7 +37,7 @@ export default function NotFound() {
           href="/"
           variant="contained"
           size="large"
-          sx={{ mt: 2 }}
+          sx={{ my: 3, backgroundColor: '#E3194B' }}
         >
           Voltar para Home
         </Button>
