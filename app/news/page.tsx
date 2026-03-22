@@ -1,5 +1,9 @@
+import { NewsGrid } from "@/components/news/NewsGrid";
+
 export default function News() {
   return (
-    <div>News</div>
+    <>
+      <NewsGrid />
+    </>
   );
 }
