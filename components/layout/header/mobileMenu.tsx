@@ -3,6 +3,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import MenuIcon from '@mui/icons-material/Menu';
 import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
+import { usePathname } from "next/navigation";
+import { useSearch } from "@/components/search/SearchContext";
 import CloseIcon from '@mui/icons-material/Close';
 import {
   Box,
@@ -33,6 +35,13 @@ const menuItems = [
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const { setIsOpen, isOpen } = useSearch();
+
+  const showSearchIcon =
+    pathname === "/" ||
+    pathname === "/news" ||
+    pathname.startsWith("/news/");
 
   const toggleDrawer = (value: boolean) => () => {
     setOpen(value);
@@ -41,14 +50,19 @@ const MobileMenu = () => {
   return (
     <>
       <Stack direction="row" spacing={1} alignItems="center">
+        {showSearchIcon && (
         <IconButton
           aria-label="search"
           sx={{
             color: '#FFF',
           }}
         >
-          <SearchIcon sx={{ fontSize: 24 }} />
+          <SearchIcon
+            sx={{ fontSize: 24 }}
+            onClick={() => setIsOpen(!isOpen)}
+          />
         </IconButton>
+        )}
 
         <MuiLink 
           component={NextLink}

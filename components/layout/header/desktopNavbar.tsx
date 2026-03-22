@@ -1,3 +1,5 @@
+"use client";
+
 import SearchIcon from '@mui/icons-material/Search';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
@@ -8,6 +10,8 @@ import {
   Stack,
 } from '@mui/material';
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
+import { useSearch } from "@/components/search/SearchContext";
 
 const primaryLinks = [
   { label: 'Home', href: '/' },
@@ -27,6 +31,14 @@ const secondaryLinks = [
 ];
 
 const DesktopNavbar = () => {
+  const pathname = usePathname();
+  const { setIsOpen, isOpen } = useSearch();
+
+  const showSearchIcon =
+    pathname === "/" ||
+    pathname === "/news" ||
+    pathname.startsWith("/news/");
+
   return (
     <Box
       sx={{
@@ -127,14 +139,17 @@ const DesktopNavbar = () => {
       </Stack>
 
       <Stack direction="row" spacing={1} alignItems="center">
-        <IconButton
-          aria-label="search"
-          sx={{
-            color: '#FFF',
-          }}
-        >
-          <SearchIcon />
-        </IconButton>
+        {showSearchIcon && (
+          <IconButton
+            aria-label="search"
+            onClick={() => setIsOpen(!isOpen)}
+            sx={{
+              color: '#FFF',
+            }}
+          >
+            <SearchIcon />
+          </IconButton>
+        )}
 
         <MuiLink 
           component={NextLink}

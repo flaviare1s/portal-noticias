@@ -1,6 +1,8 @@
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
 import Nav from "@/components/layout/nav";
+import { SearchProvider } from "@/components/search/SearchContext";
+import { SearchBar } from "@/components/search/SearchBar";
 import { Box, CssBaseline } from "@mui/material";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
@@ -40,9 +42,11 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <CssBaseline />
-        <Header />
-        <Nav />
-        <main style={{ flexGrow: 1 }}>
+        <SearchProvider>
+          <Header />
+          <SearchBar />
+          <Nav />
+          <main style={{ flexGrow: 1 }}>
           <Box
             component="section"
             sx={{
@@ -52,7 +56,8 @@ export default function RootLayout({
           >
             {children}
           </Box>
-        </main>
+          </main>
+        </SearchProvider>
 
         <Footer />
       </body>

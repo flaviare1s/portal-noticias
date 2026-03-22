@@ -4,13 +4,14 @@ import { Breadcrumbs, Typography, Link as MuiLink, Box } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
+import { noticias } from "@/infrastructure/data/news";
 
 const routeNameMap: Record<string, string> = {
   "": "Home",
   news: "Notícias",
   faq: "FAQ",
   contact: "Contato",
-  profile: "Perfil"
+  profile: "Perfil",
 };
 
 const Nav = () => {
@@ -20,7 +21,14 @@ const Nav = () => {
 
   const breadcrumbs = segments.map((segment, index) => {
     const href = "/" + segments.slice(0, index + 1).join("/");
-    const label = routeNameMap[segment] ?? segment;
+    let label = routeNameMap[segment] ?? segment;
+
+    if (segments[index - 1] === "news") {
+      const noticia = noticias.find((item) => item.slug === segment);
+      if (noticia) {
+        label = noticia.title;
+      }
+    }
 
     return {
       href,
@@ -38,9 +46,7 @@ const Nav = () => {
       }}
     >
       <Breadcrumbs
-        separator={
-          <ChevronRightIcon sx={{ fontSize: 22, color: "#6B6B6B" }} />
-        }
+        separator={<ChevronRightIcon sx={{ fontSize: 22, color: "#6B6B6B" }} />}
         aria-label="breadcrumb"
         sx={{ mb: { xs: 3, md: 4 } }}
       >

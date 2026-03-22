@@ -3,13 +3,17 @@
 import { Box } from "@mui/material";
 import { noticias } from "@/infrastructure/data/news";
 import { NewsCard } from "./NewsCard";
+import { useSearch } from "@/components/search/SearchContext";
 
 type NewsGridProps = {
   limit?: number;
 };
 
 export const NewsGrid = ({ limit }: NewsGridProps) => {
-  const data = limit ? noticias.slice(0, limit) : noticias;
+  const { results, query } = useSearch();
+
+  const source = query.trim() ? results : noticias;
+  const data = limit ? source.slice(0, limit) : source;
 
   return (
     <Box
