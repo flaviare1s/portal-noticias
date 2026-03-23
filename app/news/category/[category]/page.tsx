@@ -1,5 +1,5 @@
 import { noticias } from "@/infrastructure/data/news";
-import { NewsGrid } from "@/components/news/NewsGrid";
+import { CategoryNewsSection } from "@/components/news/CategoryNewsSection";
 import { Box, Container, Typography } from "@mui/material";
 import Link from "next/link";
 
@@ -85,7 +85,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       </Container>
 
       {filteredNews.length > 0 ? (
-        <NewsGrid items={filteredNews} variant="news" />
+        <CategoryNewsSection items={filteredNews} />
       ) : (
         <Box
           sx={{
