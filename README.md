@@ -6,7 +6,7 @@ Portal de notícias moderno desenvolvido com Next.js 15, TypeScript e Material U
 
 - **Next.js 15** - Framework React com App Router
 - **TypeScript** - Tipagem estática
-- **Material UI** - Estilização utilitária
+- **Material UI** - Biblioteca de componentes UI
 - **Zod** - Validação de schemas
 
 ## Instalação
@@ -27,65 +27,133 @@ npm start
 
 Acesse em: [http://localhost:3000](http://localhost:3000)
 
+---
+
+## Estrutura de Rotas (App Router)
+
+### Páginas principais
+
+- `/` → Página inicial (home com destaques e listagem)
+- `/news` → Listagem geral de notícias
+- `/news/[slug]` → Página dinâmica de notícia
+- `/news/category/[category]` → Listagem por categoria
+- `/live` → Página de cobertura ao vivo
+- `/faq` → Perguntas frequentes
+- `/contact` → Página de contato
+- `/profile` → Perfil do usuário
+
+### SEO
+
+- `/sitemap.xml` → Sitemap gerado dinamicamente via `app/sitemap.ts`
+- `/robots.txt` → Configuração de rastreamento via `app/robots.ts`
+
+---
+
 ## Estrutura do Projeto
 
 ```
 portal-noticias/
-├── app/                      # Next.js App Router
-│   ├── layout.tsx           # Layout raiz
-│   ├── page.tsx             # Página inicial
-│   ├── error.tsx            # Error boundary
-│   ├── loading.tsx          # Loading UI
-│   ├── not-found.tsx        # Página 404
-│   ├── news/                # Rotas de notícias
+├── app/                              # Next.js App Router
+│   ├── layout.tsx                    # Layout raiz
+│   ├── page.tsx                      # Página inicial
+│   ├── error.tsx                     # Error boundary
+│   ├── loading.tsx                   # Loading UI global
+│   ├── not-found.tsx                 # Página 404
+│   ├── sitemap.ts                    # Geração do sitemap.xml
+│   ├── robots.ts                     # Geração do robots.txt
+│   ├── live/
 │   │   └── page.tsx
-│   └── contact/             # Rotas de contato
-│       ├── page.tsx
-│       └── components/
-│           └── contactForm/
-├── components/              # Componentes React reutilizáveis
-│   └── layout/
-│       ├── header/
-│       │   └── index.tsx
-│       └── footer/
-│           └── index.tsx
-├── types/                   # Types TypeScript
-│   ├── index.ts             # Exports centralizados
-│   ├── news.types.ts        # Tipos de notícias
-│   └── contact.types.ts     # Tipos de contato
-├── schemas/                 # Validações Zod
-│   ├── news.schema.ts       # Schema de notícias
-│   └── contact.schema.ts    # Schema de contato
-├── infrastructure/          # Camada de dados
+│   ├── faq/
+│   │   └── page.tsx
+│   ├── contact/
+│   │   ├── page.tsx
+│   │   └── components/
+│   │       └── contactForm/
+│   │           └── index.tsx
+│   ├── profile/
+│   │   └── page.tsx
+│   └── news/
+│       ├── page.tsx                  # Listagem geral
+│       ├── [slug]/
+│       │   └── page.tsx              # Detalhe da notícia
+│       └── category/
+│           └── [category]/
+│               └── page.tsx          # Notícias por categoria
+│
+├── components/                       # Componentes React reutilizáveis
+│   ├── layout/
+│   │   ├── header/
+│   │   │   ├── index.tsx
+│   │   │   ├── desktopNavbar.tsx
+│   │   │   └── mobileMenu.tsx
+│   │   ├── nav/
+│   │   │   └── index.tsx
+│   │   ├── navCategory/
+│   │   │   └── index.tsx
+│   │   └── footer/
+│   │       └── index.tsx
+│   ├── news/
+│   │   ├── NewsCard.tsx
+│   │   └── NewsGrid.tsx
+│   └── search/
+│       ├── SearchBar.tsx
+│       └── SearchContext.tsx
+│
+├── infrastructure/                   # Camada de dados
 │   └── data/
-│       └── news.ts          # Dados de notícias (27 items)
-└── public/                  # Assets estáticos
+│       └── news.ts                   # Dados de notícias
+│
+├── schemas/                          # Validações Zod (runtime)
+│   ├── news.schema.ts
+│   └── contact.schema.ts
+│
+├── types/                            # Types TypeScript (compile-time)
+│   ├── index.ts
+│   ├── news.types.ts
+│   └── contact.types.ts
+│
+└── public/                           # Assets estáticos
+    └── favicon.svg
 ```
 
-### Organização
+---
 
-**types/** - Types TypeScript (compile-time)
-- Define contratos e interfaces
-- Usado em toda aplicação
-- Import: `import { News } from "@/types"`
+## Organização por Camadas
 
-**schemas/** - Validações Zod (runtime)
-- Validação de dados em runtime
-- Formulários e APIs
-- Import: `import { ContactFormSchema } from "@/schemas/contact.schema"`
+### `types/`
+- Define contratos e interfaces TypeScript
+- Utilizado em toda a aplicação
+- Exemplo:  
+  ```ts
+  import { News } from "@/types";
+  ```
 
-**infrastructure/** - Fonte de dados
-- Dados estáticos tipados
-- Futuro: integração com APIs/CMS
-- Import: `import { noticias } from "@/infrastructure/data/news"`
+### `schemas/`
+- Validação em runtime com Zod
+- Utilizado em formulários e futuras APIs
+- Exemplo:
+  ```ts
+  import { ContactFormSchema } from "@/schemas/contact.schema";
+  ```
 
+### `infrastructure/`
+- Fonte de dados (atualmente estática)
+- Preparado para futura integração com API ou CMS
+- Exemplo:
+  ```ts
+  import { noticias } from "@/infrastructure/data/news";
+  ```
+
+---
 
 ## Funcionalidades
 
-- ✅ Listagem de notícias por categoria
-- ✅ Notícias em destaque
-- ✅ Sistema de busca
-- ✅ Formulário de contato com validação
+- ✅ Listagem de notícias
+- ✅ Filtro por categoria
+- ✅ Página dinâmica por slug
+- ✅ Página de cobertura ao vivo
+- ✅ Sistema de busca com contexto global
+- ✅ Formulário de contato com validação (Zod)
 - ✅ Design responsivo
-- ✅ SEO otimizado
+- ✅ SEO com sitemap e robots dinâmicos
 - ✅ Type-safe com TypeScript
