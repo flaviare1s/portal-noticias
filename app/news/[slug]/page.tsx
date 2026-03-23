@@ -1,6 +1,7 @@
 import { noticias } from "@/infrastructure/data/news";
 import { notFound } from "next/navigation";
 import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 
 type Props = {
   params: Promise<{
@@ -24,7 +25,6 @@ export default async function NewsDetail({ params }: Props) {
         pb: { xs: 4, md: 6 },
       }}
     >
-
       <Typography
         variant="h5"
         sx={{
@@ -46,15 +46,25 @@ export default async function NewsDetail({ params }: Props) {
       </Typography>
 
       <Box
-        component="img"
-        src={noticia.imageUrl}
-        alt={noticia.imageAlt}
         sx={{
+          position: "relative",
           width: "100%",
+          height: { xs: 240, sm: 320, md: 420 },
           borderRadius: 2,
+          overflow: "hidden",
           mb: 4,
         }}
-      />
+      >
+        <Image
+          src={noticia.imageUrl}
+          alt={noticia.imageAlt}
+          fill
+          unoptimized
+          priority
+          sizes="(max-width: 600px) 100vw, (max-width: 900px) 100vw, 900px"
+          style={{ objectFit: "cover" }}
+        />
+      </Box>
 
       <Typography
         sx={{

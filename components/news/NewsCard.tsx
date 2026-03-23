@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import {
+  Box,
   Card,
   CardActionArea,
   CardContent,
-  CardMedia,
   Typography,
 } from "@mui/material";
 import NextLink from "next/link";
@@ -48,16 +49,24 @@ export const NewsCard = ({
         href={`/news/${slug}`}
         sx={{ display: "block" }}
       >
-        <CardMedia
-          component="img"
-          image={imageUrl}
-          alt={imageAlt}
+        <Box
           sx={{
+            position: "relative",
             width: "100%",
             height: { xs: 180, sm: 200, md: 220 },
-            objectFit: "cover",
+            overflow: "hidden",
           }}
-        />
+        >
+          <Image
+            src={imageUrl}
+            alt={imageAlt}
+            fill
+            unoptimized
+            priority
+            sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+            style={{ objectFit: "cover" }}
+          />
+        </Box>
 
         <CardContent sx={{ p: 2 }}>
           <Typography
