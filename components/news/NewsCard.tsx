@@ -34,6 +34,7 @@ export const NewsCard = ({
       elevation={0}
       sx={{
         width: "100%",
+        height: "100%",
         borderRadius: 2,
         overflow: "hidden",
         backgroundColor: "#FFFFFF",
@@ -47,7 +48,12 @@ export const NewsCard = ({
       <CardActionArea
         component={NextLink}
         href={`/news/${slug}`}
-        sx={{ display: "block" }}
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "stretch",
+        }}
       >
         <Box
           sx={{
@@ -55,6 +61,7 @@ export const NewsCard = ({
             width: "100%",
             height: { xs: 180, sm: 200, md: 220 },
             overflow: "hidden",
+            flexShrink: 0,
           }}
         >
           <Image
@@ -68,7 +75,15 @@ export const NewsCard = ({
           />
         </Box>
 
-        <CardContent sx={{ p: 2 }}>
+        <CardContent
+          sx={{
+            p: 2,
+            width: "100%",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Typography
             component="span"
             sx={{
@@ -78,6 +93,7 @@ export const NewsCard = ({
               fontSize: "0.7rem",
               fontWeight: 800,
               textTransform: "uppercase",
+              flexShrink: 0,
             }}
           >
             {category}
@@ -94,38 +110,48 @@ export const NewsCard = ({
               WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
               overflow: "hidden",
+              minHeight: { xs: "2.6em", md: "2.7em" },
             }}
           >
             {title}
           </Typography>
 
-          {excerpt && (
-            <Typography
-              sx={{
-                color: "#6B6B6B",
-                fontSize: "0.85rem",
-                lineHeight: 1.4,
-                mb: 1,
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-                overflow: "hidden",
-              }}
-            >
-              {excerpt}
-            </Typography>
-          )}
+          <Box
+            sx={{
+              flex: 1,
+              minHeight: { xs: 48, md: 52 },
+            }}
+          >
+            {excerpt && (
+              <Typography
+                sx={{
+                  color: "#6B6B6B",
+                  fontSize: "0.85rem",
+                  lineHeight: 1.4,
+                  mb: 1,
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                }}
+              >
+                {excerpt}
+              </Typography>
+            )}
+          </Box>
 
-          {date && (
-            <Typography
-              sx={{
-                color: "#9A9A9A",
-                fontSize: "0.75rem",
-              }}
-            >
-              {date}
-            </Typography>
-          )}
+          <Box sx={{ minHeight: "18px", flexShrink: 0 }}>
+            {date && (
+              <Typography
+                sx={{
+                  color: "#9A9A9A",
+                  fontSize: "0.75rem",
+                }}
+              >
+                {date}
+              </Typography>
+            )}
+          </Box>
         </CardContent>
       </CardActionArea>
     </Card>

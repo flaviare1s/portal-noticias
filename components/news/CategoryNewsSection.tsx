@@ -10,9 +10,7 @@ type CategoryNewsSectionProps = {
   items: typeof noticias;
 };
 
-export const CategoryNewsSection = ({
-  items,
-}: CategoryNewsSectionProps) => {
+export const CategoryNewsSection = ({ items }: CategoryNewsSectionProps) => {
   const firstNews = items[0];
   const otherNews = items.slice(1);
 
@@ -64,16 +62,6 @@ export const CategoryNewsSection = ({
     }
   };
 
-  useEffect(() => {
-    if (!containerRef.current || otherNews.length === 0) return;
-
-    const interval = setInterval(() => {
-      scrollByAmount("next");
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [otherNews.length, visibleItems]);
-
   if (!firstNews) return null;
 
   return (
@@ -107,47 +95,47 @@ export const CategoryNewsSection = ({
               <IconButton
                 onClick={() => scrollByAmount("prev")}
                 sx={{
-                  display: { xs: "none", sm: "flex" },
+                  display: "flex",
                   position: "absolute",
                   top: "50%",
-                  left: { sm: 4, md: 8 },
+                  left: { xs: 8, sm: 4, md: 8 },
                   transform: "translateY(-50%)",
                   zIndex: 3,
-                  width: { sm: 36, md: 40 },
-                  height: { sm: 36, md: 40 },
+                  width: { xs: 32, sm: 36, md: 40 },
+                  height: { xs: 32, sm: 36, md: 40 },
                   backgroundColor: "rgba(255,255,255,0.92)",
                   border: "1px solid #E0E0E0",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
                   "&:hover": {
                     backgroundColor: "#FFFFFF",
-                    transform: "translateY(-50%) scale(1.05)",
                   },
                 }}
               >
-                <ArrowBackIos sx={{ fontSize: { sm: 14, md: 16 } }} />
+                <ArrowBackIos sx={{ fontSize: { xs: 14, sm: 14, md: 16 } }} />
               </IconButton>
 
               <IconButton
                 onClick={() => scrollByAmount("next")}
                 sx={{
-                  display: { xs: "none", sm: "flex" },
+                  display: "flex",
                   position: "absolute",
                   top: "50%",
-                  right: { sm: 4, md: 8 },
+                  right: { xs: 8, sm: 4, md: 8 },
                   transform: "translateY(-50%)",
                   zIndex: 3,
-                  width: { sm: 36, md: 40 },
-                  height: { sm: 36, md: 40 },
+                  width: { xs: 32, sm: 36, md: 40 },
+                  height: { xs: 32, sm: 36, md: 40 },
                   backgroundColor: "rgba(255,255,255,0.92)",
                   border: "1px solid #E0E0E0",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
                   "&:hover": {
                     backgroundColor: "#FFFFFF",
-                    transform: "translateY(-50%) scale(1.05)",
                   },
                 }}
               >
-                <ArrowForwardIos sx={{ fontSize: { sm: 14, md: 16 } }} />
+                <ArrowForwardIos
+                  sx={{ fontSize: { xs: 14, sm: 14, md: 16 } }}
+                />
               </IconButton>
             </>
           )}
