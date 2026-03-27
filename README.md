@@ -178,7 +178,7 @@ Cobertura atual:
 
 ### Screenshot do coverage
 
-![Coverage dos testes](docs/images/coverage.png)
+<img width="1006" height="869" alt="test-coverage" src="https://github.com/user-attachments/assets/3909e5db-6c30-4fdf-ab0d-7d092cbd3dfe" />
 
 ## Funcionalidades
 
