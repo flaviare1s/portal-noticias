@@ -31,4 +31,12 @@ describe("Nav", () => {
       screen.getByText("Next.js 15: novidades e melhorias de performance"),
     ).toBeInTheDocument();
   });
+
+  it("decodes category segments in breadcrumbs", () => {
+    mockUsePathname.mockReturnValue("/news/category/Pol%C3%ADtica");
+
+    render(<Nav />);
+
+    expect(screen.getByText(/Pol.tica/i)).toBeInTheDocument();
+  });
 });

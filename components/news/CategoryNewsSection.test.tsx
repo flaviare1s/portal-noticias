@@ -37,4 +37,22 @@ describe("CategoryNewsSection", () => {
     expect(screen.queryByRole("button", { name: "Próximo" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Anterior" })).not.toBeInTheDocument();
   });
+
+  it("uses 1 visible item on small screens", () => {
+    window.innerWidth = 500;
+
+    render(<CategoryNewsSection items={noticias.slice(0, 2)} />);
+
+    expect(screen.queryByRole("button", { name: "Próximo" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Anterior" })).not.toBeInTheDocument();
+  });
+
+  it("uses 2 visible items on medium screens", () => {
+    window.innerWidth = 700;
+
+    render(<CategoryNewsSection items={noticias.slice(0, 3)} />);
+
+    expect(screen.queryByRole("button", { name: "Próximo" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Anterior" })).not.toBeInTheDocument();
+  });
 });

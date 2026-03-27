@@ -36,4 +36,13 @@ describe("NewsGrid", () => {
     expect(screen.getByText(/BC mant.m Selic em 10,5% e sinaliza cautela com infla..o/i)).toBeInTheDocument();
     expect(screen.queryByText(noticias[0].title)).not.toBeInTheDocument();
   });
+
+  it("renders home variant layout branches for featured positions", () => {
+    render(<NewsGrid items={noticias.slice(0, 4)} variant="home" />);
+
+    expect(screen.getByText(noticias[0].title)).toBeInTheDocument();
+    expect(screen.getByText(noticias[1].title)).toBeInTheDocument();
+    expect(screen.getByText(noticias[2].title)).toBeInTheDocument();
+    expect(screen.getByText(noticias[3].title)).toBeInTheDocument();
+  });
 });
