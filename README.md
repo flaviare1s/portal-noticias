@@ -1,159 +1,192 @@
 # Portal de Notícias
 
-Portal de notícias moderno desenvolvido com Next.js 15, TypeScript e Material UI.
+Portal de notícias desenvolvido com Next.js, TypeScript, Material UI e Zod.
 
-## Tecnologias
+## Stack
 
-- **Next.js 15** - Framework React com App Router
-- **TypeScript** - Tipagem estática
-- **Material UI** - Biblioteca de componentes UI
-- **Zod** - Validação de schemas
+- Next.js 16 com App Router
+- React 19
+- TypeScript
+- Material UI
+- Zod
+- Jest
+- React Testing Library
 
-## Instalação
+## Como rodar
 
 ```bash
-# Instalar dependências
 npm install
-
-# Executar em desenvolvimento
 npm run dev
+```
 
-# Build para produção
+App local: `http://localhost:3000`
+
+## Scripts
+
+```bash
+npm run dev
 npm run build
-
-# Executar produção
-npm start
+npm run start
+npm run lint
+npm run test
+npm run test:watch
+npm run test:coverage
+npm run test:coverage:open
 ```
 
-Acesse em: [http://localhost:3000](http://localhost:3000)
+## Rotas
 
----
+- `/` home com destaques e grade de notícias
+- `/news` listagem geral de notícias
+- `/news/[slug]` detalhe da notícia
+- `/news/category/[category]` listagem por categoria
+- `/live` página de cobertura ao vivo
+- `/faq` perguntas frequentes
+- `/contact` formulário de contato
+- `/profile` página de perfil
+- `/sitemap.xml` sitemap dinâmico
+- `/robots.txt` configuração de rastreamento
 
-## Estrutura de Rotas (App Router)
+## Estrutura do projeto
 
-### Páginas principais
-
-- `/` → Página inicial (home com destaques e listagem)
-- `/news` → Listagem geral de notícias
-- `/news/[slug]` → Página dinâmica de notícia
-- `/news/category/[category]` → Listagem por categoria
-- `/live` → Página de cobertura ao vivo
-- `/faq` → Perguntas frequentes
-- `/contact` → Página de contato
-- `/profile` → Perfil do usuário
-
-### SEO
-
-- `/sitemap.xml` → Sitemap gerado dinamicamente via `app/sitemap.ts`
-- `/robots.txt` → Configuração de rastreamento via `app/robots.ts`
-
----
-
-## Estrutura do Projeto
-
-```
+```text
 portal-noticias/
-├── app/                              # Next.js App Router
-│   ├── layout.tsx                    # Layout raiz
-│   ├── page.tsx                      # Página inicial
-│   ├── error.tsx                     # Error boundary
-│   ├── loading.tsx                   # Loading UI global
-│   ├── not-found.tsx                 # Página 404
-│   ├── sitemap.ts                    # Geração do sitemap.xml
-│   ├── robots.ts                     # Geração do robots.txt
-│   ├── live/
-│   │   └── page.tsx
-│   ├── faq/
-│   │   └── page.tsx
-│   ├── contact/
-│   │   ├── page.tsx
-│   │   └── components/
-│   │       └── contactForm/
-│   │           └── index.tsx
-│   ├── profile/
-│   │   └── page.tsx
-│   └── news/
-│       ├── page.tsx                  # Listagem geral
-│       ├── [slug]/
-│       │   └── page.tsx              # Detalhe da notícia
-│       └── category/
-│           └── [category]/
-│               └── page.tsx          # Notícias por categoria
-│
-├── components/                       # Componentes React reutilizáveis
-│   ├── layout/
-│   │   ├── header/
-│   │   │   ├── index.tsx
-│   │   │   ├── desktopNavbar.tsx
-│   │   │   └── mobileMenu.tsx
-│   │   ├── nav/
-│   │   │   └── index.tsx
-│   │   ├── navCategory/
-│   │   │   └── index.tsx
-│   │   └── footer/
-│   │       └── index.tsx
-│   ├── news/
-│   │   ├── NewsCard.tsx
-│   │   └── NewsGrid.tsx
-│   └── search/
-│       ├── SearchBar.tsx
-│       └── SearchContext.tsx
-│
-├── infrastructure/                   # Camada de dados
-│   └── data/
-│       └── news.ts                   # Dados de notícias
-│
-├── schemas/                          # Validações Zod (runtime)
-│   ├── news.schema.ts
-│   └── contact.schema.ts
-│
-├── types/                            # Types TypeScript (compile-time)
-│   ├── index.ts
-│   ├── news.types.ts
-│   └── contact.types.ts
-│
-└── public/                           # Assets estáticos
-    └── favicon.svg
+|-- app/
+|   |-- contact/
+|   |   |-- components/
+|   |   |   `-- contactForm/
+|   |   |       |-- index.tsx
+|   |   |       `-- index.test.tsx
+|   |   `-- page.tsx
+|   |-- faq/
+|   |   `-- page.tsx
+|   |-- live/
+|   |   `-- page.tsx
+|   |-- news/
+|   |   |-- [slug]/
+|   |   |   `-- page.tsx
+|   |   |-- category/
+|   |   |   `-- [category]/
+|   |   |       `-- page.tsx
+|   |   `-- page.tsx
+|   |-- profile/
+|   |   `-- page.tsx
+|   |-- dynamic-pages.test.tsx
+|   |-- error.tsx
+|   |-- layout.tsx
+|   |-- loading.tsx
+|   |-- not-found.tsx
+|   |-- page.tsx
+|   |-- robots.ts
+|   |-- sitemap.ts
+|   `-- static-pages.test.tsx
+|-- components/
+|   |-- layout/
+|   |   |-- footer/
+|   |   |   |-- index.tsx
+|   |   |   `-- index.test.tsx
+|   |   |-- header/
+|   |   |   |-- desktopNavbar.tsx
+|   |   |   |-- desktopNavbar.test.tsx
+|   |   |   |-- index.tsx
+|   |   |   |-- index.test.tsx
+|   |   |   |-- mobileMenu.tsx
+|   |   |   `-- mobileMenu.test.tsx
+|   |   |-- nav/
+|   |   |   |-- index.tsx
+|   |   |   `-- index.test.tsx
+|   |   `-- navCategory/
+|   |       |-- index.tsx
+|   |       `-- index.test.tsx
+|   |-- news/
+|   |   |-- CategoryNewsSection.tsx
+|   |   |-- CategoryNewsSection.test.tsx
+|   |   |-- NewsCard.tsx
+|   |   |-- NewsCard.test.tsx
+|   |   |-- NewsGrid.tsx
+|   |   `-- NewsGrid.test.tsx
+|   `-- search/
+|       |-- SearchBar.tsx
+|       |-- SearchBar.test.tsx
+|       |-- SearchContext.tsx
+|       `-- SearchContext.test.tsx
+|-- docs/
+|   `-- images/
+|       `-- coverage.png
+|-- infrastructure/
+|   `-- data/
+|       `-- news.ts
+|-- public/
+|   `-- favicon.svg
+|-- schemas/
+|   |-- contact.schema.ts
+|   |-- news.schema.ts
+|   `-- news.schema.test.ts
+|-- scripts/
+|   `-- testCoverageOpen.js
+|-- types/
+|   |-- contact.types.ts
+|   |-- index.ts
+|   |-- news.types.ts
+|   `-- types-runtime.test.ts
+|-- jest.config.js
+|-- package.json
+|-- setupTests.ts
+`-- tsconfig.json
 ```
 
----
+## Testes
 
-## Organização por Camadas
+O projeto usa `Jest` com `next/jest` e `React Testing Library`.
 
-### `types/`
-- Define contratos e interfaces TypeScript
-- Utilizado em toda a aplicação
-- Exemplo:  
-  ```ts
-  import { News } from "@/types";
-  ```
+Arquivos principais da configuração:
 
-### `schemas/`
-- Validação em runtime com Zod
-- Utilizado em formulários e futuras APIs
-- Exemplo:
-  ```ts
-  import { ContactFormSchema } from "@/schemas/contact.schema";
-  ```
+- [jest.config.js](./jest.config.js)
+- [setupTests.ts](./setupTests.ts)
+- [scripts/testCoverageOpen.js](./scripts/testCoverageOpen.js)
 
-### `infrastructure/`
-- Fonte de dados (atualmente estática)
-- Preparado para futura integração com API ou CMS
-- Exemplo:
-  ```ts
-  import { noticias } from "@/infrastructure/data/news";
-  ```
+Comandos:
 
----
+```bash
+# roda a suíte uma vez
+npm run test
+
+# modo watch
+npm run test:watch
+
+# gera coverage em terminal + HTML
+npm run test:coverage
+
+# gera coverage e abre o relatório HTML
+npm run test:coverage:open
+```
+
+O relatório HTML interativo fica em:
+
+```text
+coverage/lcov-report/index.html
+```
+
+## Coverage
+
+Cobertura atual:
+
+- Statements: `100%`
+- Branches: `94.7%`
+- Functions: `93.93%`
+- Lines: `100%`
+
+### Screenshot do coverage
+
+![Coverage dos testes](docs/images/coverage.png)
 
 ## Funcionalidades
 
-- ✅ Listagem de notícias
-- ✅ Filtro por categoria
-- ✅ Página dinâmica por slug
-- ✅ Página de cobertura ao vivo
-- ✅ Sistema de busca com contexto global
-- ✅ Formulário de contato com validação (Zod)
-- ✅ Design responsivo
-- ✅ SEO com sitemap e robots dinâmicos
-- ✅ Type-safe com TypeScript
+- listagem de notícias
+- página de detalhe por slug
+- filtro por categoria
+- busca global por contexto
+- formulário de contato com validação
+- layout responsivo para desktop e mobile
+- sitemap e robots dinâmicos
+- suíte de testes com coverage HTML
