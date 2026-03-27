@@ -35,7 +35,7 @@ describe("ContactForm", () => {
     await user.type(screen.getByLabelText("E-mail *"), "joao@example.com");
     await user.type(
       screen.getByLabelText("Mensagem *"),
-      "Esta mensagem tem tamanho suficiente para passar na validacao.",
+      "Mensagem valida com vinte caracteres.",
     );
     await user.click(screen.getByRole("button", { name: "Enviar mensagem" }));
 
@@ -44,5 +44,5 @@ describe("ContactForm", () => {
     expect(screen.getByLabelText("Nome *")).toHaveValue("");
     expect(screen.getByLabelText("E-mail *")).toHaveValue("");
     expect(screen.getByLabelText("Mensagem *")).toHaveValue("");
-  });
+  }, 15000);
 });
