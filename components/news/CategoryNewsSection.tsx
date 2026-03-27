@@ -93,6 +93,7 @@ export const CategoryNewsSection = ({ items }: CategoryNewsSectionProps) => {
           {otherNews.length > visibleItems && (
             <>
               <IconButton
+                aria-label="Anterior"
                 onClick={() => scrollByAmount("prev")}
                 sx={{
                   display: "flex",
@@ -115,6 +116,7 @@ export const CategoryNewsSection = ({ items }: CategoryNewsSectionProps) => {
               </IconButton>
 
               <IconButton
+                aria-label="Próximo"
                 onClick={() => scrollByAmount("next")}
                 sx={{
                   display: "flex",
