@@ -12,6 +12,14 @@ type SearchContextType = {
   results: News[];
 };
 
+const searchFallback: SearchContextType = {
+  query: "",
+  setQuery: () => {},
+  isOpen: false,
+  setIsOpen: () => {},
+  results: [],
+};
+
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export const SearchProvider = ({
@@ -57,4 +65,9 @@ export const useSearch = () => {
     throw new Error("useSearch must be used within SearchProvider");
   }
   return context;
+};
+
+export const useSearchOptional = () => {
+  const context = useContext(SearchContext);
+  return context ?? searchFallback;
 };

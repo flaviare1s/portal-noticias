@@ -5,14 +5,14 @@ import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { NewsCard } from "./NewsCard";
 import type { News } from "@/types";
-import { useSearch } from "@/contexts/SearchContext";
+import { useSearchOptional } from "@/contexts/SearchContext";
 
 type CategoryNewsSectionProps = {
   items: News[];
 };
 
 export const CategoryNewsSection = ({ items }: CategoryNewsSectionProps) => {
-  const { query, results } = useSearch();
+  const { query, results } = useSearchOptional();
   const scopedItems = useMemo(() => {
     if (!query.trim()) return items;
 

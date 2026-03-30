@@ -6,7 +6,7 @@ import { CategoryNewsSection } from "./CategoryNewsSection";
 const mockUseSearch = jest.fn();
 
 jest.mock("@/contexts/SearchContext", () => ({
-  useSearch: () => mockUseSearch(),
+  useSearchOptional: () => mockUseSearch(),
 }));
 
 describe("CategoryNewsSection", () => {
