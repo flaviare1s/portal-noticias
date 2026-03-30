@@ -182,7 +182,7 @@ Cobertura atual:
 
 ### Screenshot do coverage
 
-<img width="1006" height="869" alt="test-coverage" src="https://github.com/user-attachments/assets/3909e5db-6c30-4fdf-ab0d-7d092cbd3dfe" />
+<img width="1091" height="868" alt="coverage" src="https://github.com/user-attachments/assets/24816d42-964a-4640-b6ed-57385e0039bb" />
 
 ## Funcionalidades
 
