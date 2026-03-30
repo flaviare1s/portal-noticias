@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
-import { noticias } from "@/infrastructure/data/news";
+import { getAllNews } from "@/services/news";
 
 const BASE_URL = "https://portal-noticias-i6g7.vercel.app";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const noticias = await getAllNews();
+
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${BASE_URL}/`,

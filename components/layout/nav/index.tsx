@@ -4,7 +4,7 @@ import { Breadcrumbs, Typography, Link as MuiLink, Box } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { noticias } from "@/infrastructure/data/news";
+import { useNews } from "@/contexts/NewsContext";
 
 const routeNameMap: Record<string, string> = {
   "": "Home",
@@ -17,6 +17,7 @@ const routeNameMap: Record<string, string> = {
 
 const Nav = () => {
   const pathname = usePathname();
+  const { news } = useNews();
 
   const segments = pathname.split("/").filter(Boolean);
 
@@ -30,7 +31,7 @@ const Nav = () => {
 
       // Se for detalhe de notícia
       if (filteredSegments[index - 1] === "news") {
-        const noticia = noticias.find((item) => item.slug === segment);
+        const noticia = news.find((item) => item.slug === segment);
         if (noticia) {
           label = noticia.title;
         }
@@ -39,7 +40,7 @@ const Nav = () => {
       // Se for página de categoria
       if (
         filteredSegments[index - 1] === "news" &&
-        !noticias.find((item) => item.slug === segment)
+        !news.find((item) => item.slug === segment)
       ) {
         label = decodeURIComponent(segment);
       }

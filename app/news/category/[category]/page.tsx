@@ -1,7 +1,7 @@
-import { noticias } from "@/infrastructure/data/news";
 import { CategoryNewsSection } from "@/components/news/CategoryNewsSection";
 import { Box, Container, Typography } from "@mui/material";
 import Link from "next/link";
+import { getNewsByCategory, getNewsCategories } from "@/services/news";
 
 type CategoryPageProps = {
   params: Promise<{
@@ -13,11 +13,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params;
   const decodedCategory = decodeURIComponent(category);
 
-  const categories = Array.from(new Set(noticias.map((item) => item.category)));
-
-  const filteredNews = noticias.filter(
-    (news) => news.category === decodedCategory,
-  );
+  const [categories, filteredNews] = await Promise.all([
+    getNewsCategories(),
+    getNewsByCategory(decodedCategory),
+  ]);
 
   return (
     <Box sx={{ margin: "0 auto", px: 2, py: 3 }}>

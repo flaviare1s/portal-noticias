@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { Box, Stack, Typography } from "@mui/material";
-import { noticias } from "@/infrastructure/data/news";
+import { useNews } from "@/contexts/NewsContext";
 
 const NavCategory = () => {
-  const categories = Array.from(
-    new Set(noticias.map((noticia) => noticia.category))
-  );
+  const { categories } = useNews();
 
   return (
     <Box

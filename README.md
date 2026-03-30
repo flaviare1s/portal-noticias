@@ -51,88 +51,92 @@ npm run test:coverage:open
 
 ```text
 portal-noticias/
-|-- app/
-|   |-- contact/
-|   |   |-- components/
-|   |   |   `-- contactForm/
-|   |   |       |-- index.tsx
-|   |   |       `-- index.test.tsx
-|   |   `-- page.tsx
-|   |-- faq/
-|   |   `-- page.tsx
-|   |-- live/
-|   |   `-- page.tsx
-|   |-- news/
-|   |   |-- [slug]/
-|   |   |   `-- page.tsx
-|   |   |-- category/
-|   |   |   `-- [category]/
-|   |   |       `-- page.tsx
-|   |   `-- page.tsx
-|   |-- profile/
-|   |   `-- page.tsx
-|   |-- dynamic-pages.test.tsx
-|   |-- error.tsx
-|   |-- layout.tsx
-|   |-- loading.tsx
-|   |-- not-found.tsx
-|   |-- page.tsx
-|   |-- robots.ts
-|   |-- sitemap.ts
-|   `-- static-pages.test.tsx
-|-- components/
-|   |-- layout/
-|   |   |-- footer/
-|   |   |   |-- index.tsx
-|   |   |   `-- index.test.tsx
-|   |   |-- header/
-|   |   |   |-- desktopNavbar.tsx
-|   |   |   |-- desktopNavbar.test.tsx
-|   |   |   |-- index.tsx
-|   |   |   |-- index.test.tsx
-|   |   |   |-- mobileMenu.tsx
-|   |   |   `-- mobileMenu.test.tsx
-|   |   |-- nav/
-|   |   |   |-- index.tsx
-|   |   |   `-- index.test.tsx
-|   |   `-- navCategory/
-|   |       |-- index.tsx
-|   |       `-- index.test.tsx
-|   |-- news/
-|   |   |-- CategoryNewsSection.tsx
-|   |   |-- CategoryNewsSection.test.tsx
-|   |   |-- NewsCard.tsx
-|   |   |-- NewsCard.test.tsx
-|   |   |-- NewsGrid.tsx
-|   |   `-- NewsGrid.test.tsx
-|   `-- search/
-|       |-- SearchBar.tsx
-|       |-- SearchBar.test.tsx
-|       |-- SearchContext.tsx
-|       `-- SearchContext.test.tsx
-|-- docs/
-|   `-- images/
-|       `-- coverage.png
-|-- infrastructure/
-|   `-- data/
-|       `-- news.ts
-|-- public/
-|   `-- favicon.svg
-|-- schemas/
-|   |-- contact.schema.ts
-|   |-- news.schema.ts
-|   `-- news.schema.test.ts
-|-- scripts/
-|   `-- testCoverageOpen.js
-|-- types/
-|   |-- contact.types.ts
-|   |-- index.ts
-|   |-- news.types.ts
-|   `-- types-runtime.test.ts
-|-- jest.config.js
-|-- package.json
-|-- setupTests.ts
-`-- tsconfig.json
+├── app/
+│   ├── contact/
+│   │   ├── components/
+│   │   │   └── contactForm/
+│   │   │       ├── index.tsx
+│   │   │       └── index.test.tsx
+│   │   └── page.tsx
+│   ├── faq/
+│   │   └── page.tsx
+│   ├── live/
+│   │   └── page.tsx
+│   ├── news/
+│   │   ├── [slug]/
+│   │   │   └── page.tsx
+│   │   ├── category/
+│   │   │   └── [category]/
+│   │   │       └── page.tsx
+│   │   └── page.tsx
+│   ├── profile/
+│   │   └── page.tsx
+│   ├── dynamic-pages.test.tsx
+│   ├── error.tsx
+│   ├── layout.tsx
+│   ├── loading.tsx
+│   ├── not-found.tsx
+│   ├── page.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   └── static-pages.test.tsx
+├── components/
+│   ├── layout/
+│   │   ├── footer/
+│   │   │   ├── index.tsx
+│   │   │   └── index.test.tsx
+│   │   ├── header/
+│   │   │   ├── desktopNavbar.tsx
+│   │   │   ├── desktopNavbar.test.tsx
+│   │   │   ├── index.tsx
+│   │   │   ├── index.test.tsx
+│   │   │   ├── mobileMenu.tsx
+│   │   │   └── mobileMenu.test.tsx
+│   │   ├── nav/
+│   │   │   ├── index.tsx
+│   │   │   └── index.test.tsx
+│   │   └── navCategory/
+│   │       ├── index.tsx
+│   │       └── index.test.tsx
+│   ├── news/
+│   │   ├── CategoryNewsSection.tsx
+│   │   ├── CategoryNewsSection.test.tsx
+│   │   ├── NewsCard.tsx
+│   │   ├── NewsCard.test.tsx
+│   │   ├── NewsGrid.tsx
+│   │   └── NewsGrid.test.tsx
+│   └── search/
+│       ├── SearchBar.tsx
+│       └── SearchBar.test.tsx
+├── contexts/
+│   ├── NewsContext.tsx
+│   ├── SearchContext.tsx
+│   └── SearchContext.test.tsx
+├── infrastructure/
+│   └── data/
+│       └── news.ts
+├── public/
+│   └── favicon.svg
+├── schemas/
+│   ├── contact.schema.ts
+│   ├── news.schema.ts
+│   └── news.schema.test.ts
+├── scripts/
+│   └── testCoverageOpen.js
+├── services/
+│   ├── mockUrls.ts
+│   └── news.ts
+├── types/
+│   ├── contact.types.ts
+│   ├── index.ts
+│   ├── news.types.ts
+│   └── types-runtime.test.ts
+├── eslint.config.mjs
+├── jest.config.js
+├── next.config.ts
+├── package.json
+├── setupTests.ts
+└── tsconfig.json
 ```
 
 ## Testes

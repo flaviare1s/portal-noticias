@@ -6,11 +6,17 @@ import FaqPage from "./faq/page";
 import ProfilePage from "./profile/page";
 import LivePage from "./live/page";
 import ContactPage from "./contact/page";
+import { noticias } from "@/infrastructure/data/news";
 
 const mockUsePathname = jest.fn();
+const mockUseNews = jest.fn();
 
 jest.mock("next/navigation", () => ({
   usePathname: () => mockUsePathname(),
+}));
+
+jest.mock("@/contexts/NewsContext", () => ({
+  useNews: () => mockUseNews(),
 }));
 
 jest.mock("@/components/news/NewsGrid", () => ({
@@ -28,6 +34,10 @@ describe("static pages", () => {
   beforeEach(() => {
     mockUsePathname.mockReset();
     mockUsePathname.mockReturnValue("/news");
+    mockUseNews.mockReset();
+    mockUseNews.mockReturnValue({
+      categories: Array.from(new Set(noticias.map((item) => item.category))),
+    });
   });
 
   it("renders the home page grid", () => {

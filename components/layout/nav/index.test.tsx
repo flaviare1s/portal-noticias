@@ -1,15 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import Nav from "./index";
+import { noticias } from "@/infrastructure/data/news";
 
 const mockUsePathname = jest.fn();
+const mockUseNews = jest.fn();
 
 jest.mock("next/navigation", () => ({
   usePathname: () => mockUsePathname(),
 }));
 
+jest.mock("@/contexts/NewsContext", () => ({
+  useNews: () => mockUseNews(),
+}));
+
 describe("Nav", () => {
   beforeEach(() => {
     mockUsePathname.mockReset();
+    mockUseNews.mockReset();
+    mockUseNews.mockReturnValue({ news: noticias });
   });
 
   it("renders only the home breadcrumb on root path", () => {

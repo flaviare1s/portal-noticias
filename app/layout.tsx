@@ -1,12 +1,13 @@
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";
-import { SearchProvider } from "@/components/search/SearchContext";
+import { SearchProvider } from "@/contexts/SearchContext";
 import { SearchBar } from "@/components/search/SearchBar";
 import { Box, CssBaseline } from "@mui/material";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import NavCategory from "@/components/layout/navCategory";
 import Nav from "@/components/layout/nav";
+import { NewsProvider } from "@/contexts/NewsContext";
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -46,23 +47,25 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <CssBaseline />
-        <SearchProvider>
-          <Header />
-          <SearchBar />
-          <NavCategory />
-          <Nav />
-          <main style={{ flexGrow: 1 }}>
-          <Box
-            component="section"
-            sx={{
-              width: "100%",
-              py: 1,
-            }}
-          >
-            {children}
-          </Box>
-          </main>
-        </SearchProvider>
+        <NewsProvider>
+          <SearchProvider>
+            <Header />
+            <SearchBar />
+            <NavCategory />
+            <Nav />
+            <main style={{ flexGrow: 1 }}>
+            <Box
+              component="section"
+              sx={{
+                width: "100%",
+                py: 1,
+              }}
+            >
+              {children}
+            </Box>
+            </main>
+          </SearchProvider>
+        </NewsProvider>
 
         <Footer />
       </body>

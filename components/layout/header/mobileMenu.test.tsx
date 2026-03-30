@@ -10,7 +10,7 @@ jest.mock("next/navigation", () => ({
   usePathname: () => mockUsePathname(),
 }));
 
-jest.mock("@/components/search/SearchContext", () => ({
+jest.mock("@/contexts/SearchContext", () => ({
   useSearch: () => ({
     isOpen: false,
     setIsOpen: mockSetIsOpen,

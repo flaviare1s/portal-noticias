@@ -1,12 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SearchBar } from "./SearchBar";
-import { SearchProvider, useSearch } from "./SearchContext";
+import { SearchProvider, useSearch } from "@/contexts/SearchContext";
+import { noticias } from "@/infrastructure/data/news";
 
 const mockUsePathname = jest.fn();
+const mockUseNews = jest.fn();
 
 jest.mock("next/navigation", () => ({
   usePathname: () => mockUsePathname(),
+}));
+
+jest.mock("@/contexts/NewsContext", () => ({
+  useNews: () => mockUseNews(),
 }));
 
 const SearchControls = () => {
@@ -23,6 +29,8 @@ describe("SearchBar", () => {
   beforeEach(() => {
     mockUsePathname.mockReset();
     mockUsePathname.mockReturnValue("/");
+    mockUseNews.mockReset();
+    mockUseNews.mockReturnValue({ news: noticias });
   });
 
   it("renders on supported routes when search is open and updates query", async () => {

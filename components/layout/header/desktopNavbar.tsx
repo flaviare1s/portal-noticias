@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { useSearch } from "@/components/search/SearchContext";
+import { useSearch } from "@/contexts/SearchContext";
 
 const primaryLinks = [
   { label: 'Home', href: '/' },

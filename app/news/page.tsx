@@ -2,14 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { noticias } from "@/infrastructure/data/news";
 import { NewsGrid } from "@/components/news/NewsGrid";
 import { Container, Typography, Box } from "@mui/material";
+import { useNews } from "@/contexts/NewsContext";
 
 export default function News() {
   const pathname = usePathname();
-
-  const categories = Array.from(new Set(noticias.map((n) => n.category)));
+  const { categories } = useNews();
 
   return (
     <>
@@ -87,7 +86,7 @@ export default function News() {
           })}
         </Box>
       </Container>
-      <NewsGrid variant="news" items={noticias} />
+      <NewsGrid variant="news" />
     </>
   );
 }

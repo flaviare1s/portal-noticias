@@ -1,7 +1,7 @@
-import { noticias } from "@/infrastructure/data/news";
 import { notFound } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { getNewsBySlug } from "@/services/news";
 
 type Props = {
   params: Promise<{
@@ -12,7 +12,7 @@ type Props = {
 export default async function NewsDetail({ params }: Props) {
   const { slug } = await params;
 
-  const noticia = noticias.find((item) => item.slug === slug);
+  const noticia = await getNewsBySlug(slug);
 
   if (!noticia) return notFound();
 
@@ -61,6 +61,7 @@ export default async function NewsDetail({ params }: Props) {
           fill
           unoptimized
           priority
+          fetchPriority="high"
           sizes="(max-width: 600px) 100vw, (max-width: 900px) 100vw, 900px"
           style={{ objectFit: "cover" }}
         />

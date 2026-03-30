@@ -1,6 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SearchProvider, useSearch } from "./SearchContext";
+import { SearchProvider, useSearch } from "@/contexts/SearchContext";
+
+jest.mock("@/contexts/NewsContext", () => ({
+  useNews: () => {
+    const { noticias } = jest.requireActual("@/infrastructure/data/news");
+    return { news: noticias };
+  },
+}));
 
 const SearchConsumer = () => {
   const { query, setQuery, isOpen, setIsOpen, results } = useSearch();

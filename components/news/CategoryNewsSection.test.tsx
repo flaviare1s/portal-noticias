@@ -3,15 +3,25 @@ import userEvent from "@testing-library/user-event";
 import { noticias } from "@/infrastructure/data/news";
 import { CategoryNewsSection } from "./CategoryNewsSection";
 
+const mockUseSearch = jest.fn();
+
+jest.mock("@/contexts/SearchContext", () => ({
+  useSearch: () => mockUseSearch(),
+}));
+
 describe("CategoryNewsSection", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockUseSearch.mockReturnValue({
+      query: "",
+      results: noticias,
+    });
   });
 
-  it("returns null when there are no items", () => {
-    const { container } = render(<CategoryNewsSection items={[]} />);
+  it("shows empty state when there are no items", () => {
+    render(<CategoryNewsSection items={[]} />);
 
-    expect(container).toBeEmptyDOMElement();
+    expect(screen.getByText(/Nenhuma noticia encontrada/i)).toBeInTheDocument();
   });
 
   it("renders headline and carousel controls for larger collections", async () => {
@@ -22,7 +32,7 @@ describe("CategoryNewsSection", () => {
 
     expect(screen.getByText(noticias[0].title)).toBeInTheDocument();
 
-    await user.click(screen.getByRole("button", { name: "Próximo" }));
+    await user.click(screen.getByRole("button", { name: /Pr.ximo/i }));
     await user.click(screen.getByRole("button", { name: "Anterior" }));
 
     expect(window.HTMLElement.prototype.scrollBy).toHaveBeenCalled();
@@ -34,7 +44,7 @@ describe("CategoryNewsSection", () => {
 
     render(<CategoryNewsSection items={noticias.slice(0, 4)} />);
 
-    expect(screen.queryByRole("button", { name: "Próximo" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "PrÃ³ximo" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Anterior" })).not.toBeInTheDocument();
   });
 
@@ -43,7 +53,7 @@ describe("CategoryNewsSection", () => {
 
     render(<CategoryNewsSection items={noticias.slice(0, 2)} />);
 
-    expect(screen.queryByRole("button", { name: "Próximo" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "PrÃ³ximo" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Anterior" })).not.toBeInTheDocument();
   });
 
@@ -52,7 +62,21 @@ describe("CategoryNewsSection", () => {
 
     render(<CategoryNewsSection items={noticias.slice(0, 3)} />);
 
-    expect(screen.queryByRole("button", { name: "Próximo" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "PrÃ³ximo" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Anterior" })).not.toBeInTheDocument();
+  });
+
+  it("shows empty state when query has no matches inside the category scope", () => {
+    mockUseSearch.mockReturnValue({
+      query: "Termo inexistente",
+      results: [],
+    });
+
+    render(<CategoryNewsSection items={noticias.slice(0, 3)} />);
+
+    expect(screen.getByText(/Nenhuma noticia encontrada/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Nao ha noticias para este filtro nesta categoria/i),
+    ).toBeInTheDocument();
   });
 });

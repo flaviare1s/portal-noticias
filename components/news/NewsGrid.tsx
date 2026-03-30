@@ -1,20 +1,22 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { noticias } from "@/infrastructure/data/news";
 import { NewsCard } from "./NewsCard";
-import { useSearch } from "@/components/search/SearchContext";
+import { useSearch } from "@/contexts/SearchContext";
+import { useNews } from "@/contexts/NewsContext";
+import type { News } from "@/types";
 
 type NewsGridProps = {
   limit?: number;
   variant?: "home" | "news";
-  items?: typeof noticias;
+  items?: News[];
 };
 
 export const NewsGrid = ({ limit, variant = "news", items }: NewsGridProps) => {
+  const { news } = useNews();
   const { results, query } = useSearch();
 
-  const baseSource = items ?? (query.trim() ? results : noticias);
+  const baseSource = items ?? (query.trim() ? results : news);
   const data = limit ? baseSource.slice(0, limit) : baseSource;
 
   return (
@@ -62,6 +64,7 @@ export const NewsGrid = ({ limit, variant = "news", items }: NewsGridProps) => {
               imageUrl={item.imageUrl}
               imageAlt={item.imageAlt}
               date={item.date}
+              imagePriority={index === 0}
             />
           </Box>
         );

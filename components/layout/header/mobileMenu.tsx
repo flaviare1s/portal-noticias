@@ -4,7 +4,7 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import MenuIcon from '@mui/icons-material/Menu';
 import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
 import { usePathname } from "next/navigation";
-import { useSearch } from "@/components/search/SearchContext";
+import { useSearch } from "@/contexts/SearchContext";
 import CloseIcon from '@mui/icons-material/Close';
 import {
   Box,

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, TextField } from "@mui/material";
-import { useSearch } from "./SearchContext";
+import { useSearch } from "@/contexts/SearchContext";
 import { usePathname } from "next/navigation";
 
 export const SearchBar = () => {

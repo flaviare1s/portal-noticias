@@ -18,6 +18,7 @@ export type NewsCardProps = {
   imageUrl: string;
   imageAlt: string;
   date?: string;
+  imagePriority?: boolean;
 };
 
 export const NewsCard = ({
@@ -28,6 +29,7 @@ export const NewsCard = ({
   imageUrl,
   imageAlt,
   date,
+  imagePriority = false,
 }: NewsCardProps) => {
   return (
     <Card
@@ -69,7 +71,8 @@ export const NewsCard = ({
             alt={imageAlt}
             fill
             unoptimized
-            priority
+            priority={imagePriority}
+            fetchPriority={imagePriority ? "high" : "auto"}
             sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
             style={{ objectFit: "cover" }}
           />

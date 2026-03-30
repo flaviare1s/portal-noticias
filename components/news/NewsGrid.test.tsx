@@ -3,14 +3,21 @@ import { noticias } from "@/infrastructure/data/news";
 import { NewsGrid } from "./NewsGrid";
 
 const mockUseSearch = jest.fn();
+const mockUseNews = jest.fn();
 
-jest.mock("@/components/search/SearchContext", () => ({
+jest.mock("@/contexts/SearchContext", () => ({
   useSearch: () => mockUseSearch(),
+}));
+
+jest.mock("@/contexts/NewsContext", () => ({
+  useNews: () => mockUseNews(),
 }));
 
 describe("NewsGrid", () => {
   beforeEach(() => {
     mockUseSearch.mockReset();
+    mockUseNews.mockReset();
+    mockUseNews.mockReturnValue({ news: noticias });
     mockUseSearch.mockReturnValue({
       query: "",
       results: noticias,

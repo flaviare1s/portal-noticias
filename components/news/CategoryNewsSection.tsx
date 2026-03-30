@@ -1,18 +1,27 @@
 "use client";
 
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { NewsCard } from "./NewsCard";
-import { noticias } from "@/infrastructure/data/news";
+import type { News } from "@/types";
+import { useSearch } from "@/contexts/SearchContext";
 
 type CategoryNewsSectionProps = {
-  items: typeof noticias;
+  items: News[];
 };
 
 export const CategoryNewsSection = ({ items }: CategoryNewsSectionProps) => {
-  const firstNews = items[0];
-  const otherNews = items.slice(1);
+  const { query, results } = useSearch();
+  const scopedItems = useMemo(() => {
+    if (!query.trim()) return items;
+
+    const scopedSlugs = new Set(items.map((item) => item.slug));
+    return results.filter((item) => scopedSlugs.has(item.slug));
+  }, [items, query, results]);
+
+  const firstNews = scopedItems[0];
+  const otherNews = scopedItems.slice(1);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [visibleItems, setVisibleItems] = useState(3);
@@ -62,7 +71,39 @@ export const CategoryNewsSection = ({ items }: CategoryNewsSectionProps) => {
     }
   };
 
-  if (!firstNews) return null;
+  if (!firstNews) {
+    return (
+      <Box
+        sx={{
+          mt: 6,
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 1,
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 700,
+            color: "#1F1F1F",
+          }}
+        >
+          Nenhuma noticia encontrada
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            color: "#666",
+            maxWidth: 400,
+          }}
+        >
+          Nao ha noticias para este filtro nesta categoria.
+        </Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box
@@ -85,6 +126,7 @@ export const CategoryNewsSection = ({ items }: CategoryNewsSectionProps) => {
           imageUrl={firstNews.imageUrl}
           imageAlt={firstNews.imageAlt}
           date={firstNews.date}
+          imagePriority
         />
       </Box>
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, useContext, useMemo, useState } from "react";
-import { noticias } from "@/infrastructure/data/news";
 import type { News } from "@/types";
+import { useNews } from "@/contexts/NewsContext";
 
 type SearchContextType = {
   query: string;
@@ -19,21 +19,22 @@ export const SearchProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const { news } = useNews();
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const results = useMemo(() => {
-    if (!query.trim()) return noticias;
+    if (!query.trim()) return news;
 
     const normalized = query.toLowerCase();
 
-    return noticias.filter((item) => {
+    return news.filter((item) => {
       return Object.values(item)
         .join(" ")
         .toLowerCase()
         .includes(normalized);
     });
-  }, [query]);
+  }, [news, query]);
 
   return (
     <SearchContext.Provider
