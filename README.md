@@ -194,3 +194,6 @@ Cobertura atual:
 - layout responsivo para desktop e mobile
 - sitemap e robots dinâmicos
 - suíte de testes com coverage HTML
+
+## Deploy
+https://portal-noticias-i6g7.vercel.app/
