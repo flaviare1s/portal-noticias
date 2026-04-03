@@ -6,8 +6,9 @@ import { Box, CssBaseline } from "@mui/material";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import NavCategory from "@/components/layout/navCategory";
-import Nav from "@/components/layout/nav";
+import NavWrapper from "@/components/layout/navWrapper";
 import { NewsProvider } from "@/contexts/NewsContext";
+import { NotFoundProvider } from "@/contexts/NotFoundContext";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -41,27 +42,29 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <CssBaseline />
-        <NewsProvider>
-          <SearchProvider>
-            <div className="flex-1 bg-[#ECECEC]">
-              <Header />
-              <SearchBar />
-              <NavCategory />
-              <Nav />
-              <main className="flex-1">
-                <Box
-                  component="section"
-                  sx={{
-                    width: "100%",
-                    py: 1,
-                  }}
-                >
-                  {children}
-                </Box>
-              </main>
-            </div>
-          </SearchProvider>
-        </NewsProvider>
+        <NotFoundProvider>
+          <NewsProvider>
+            <SearchProvider>
+              <div className="flex-1 bg-[#ECECEC]">
+                <Header />
+                <SearchBar />
+                <NavCategory />
+                <NavWrapper />
+                <main className="flex-1">
+                  <Box
+                    component="section"
+                    sx={{
+                      width: "100%",
+                      py: 1,
+                    }}
+                  >
+                    {children}
+                  </Box>
+                </main>
+              </div>
+            </SearchProvider>
+          </NewsProvider>
+        </NotFoundProvider>
 
         <Footer />
       </body>
