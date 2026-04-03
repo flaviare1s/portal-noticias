@@ -35,7 +35,7 @@ export default function News() {
         </Typography>
 
         <Box sx={{ mt: 3, display: "flex", gap: 1, flexWrap: "wrap" }}>
-          <Link href="/news" style={{ textDecoration: "none" }}>
+          <Link href="/news" className="no-underline">
             <Box
               sx={{
                 px: 2,
@@ -43,13 +43,13 @@ export default function News() {
                 borderRadius: "999px",
                 fontSize: "0.85rem",
                 fontWeight: 600,
-                backgroundColor: pathname === "/news" ? "#E3194B" : "transparent",
+                backgroundColor:
+                  pathname === "/news" ? "#E3194B" : "transparent",
                 color: pathname === "/news" ? "#FFFFFF" : "#E3194B",
                 border: "1px solid #E3194B",
                 transition: "all 0.2s ease",
                 "&:hover": {
-                  backgroundColor:
-                    pathname === "/news" ? "#E3194B" : "#fbe3ea",
+                  backgroundColor: pathname === "/news" ? "#E3194B" : "#fbe3ea",
                 },
               }}
             >
@@ -62,7 +62,7 @@ export default function News() {
             const isActive = pathname === href;
 
             return (
-              <Link key={category} href={href} style={{ textDecoration: "none" }}>
+              <Link key={category} href={href} className="no-underline">
                 <Box
                   sx={{
                     px: 2,

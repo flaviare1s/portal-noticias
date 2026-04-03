@@ -57,7 +57,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               <Link
                 key={cat}
                 href={`/news/category/${encodeURIComponent(cat)}`}
-                style={{ textDecoration: "none" }}
+                className="no-underline"
               >
                 <Box
                   sx={{

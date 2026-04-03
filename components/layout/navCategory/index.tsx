@@ -31,10 +31,7 @@ const NavCategory = () => {
           <Link
             key={category}
             href={`/news/category/${encodeURIComponent(category)}`}
-            style={{
-              textDecoration: "none",
-              display: "inline-block",
-            }}
+            className="no-underline inline-block"
           >
             <Typography
               component="span"

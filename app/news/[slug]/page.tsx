@@ -63,7 +63,7 @@ export default async function NewsDetail({ params }: Props) {
           priority
           fetchPriority="high"
           sizes="(max-width: 600px) 100vw, (max-width: 900px) 100vw, 900px"
-          style={{ objectFit: "cover" }}
+          className="object-cover"
         />
       </Box>
 

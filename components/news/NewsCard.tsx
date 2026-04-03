@@ -74,7 +74,7 @@ export const NewsCard = ({
             priority={imagePriority}
             fetchPriority={imagePriority ? "high" : "auto"}
             sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-            style={{ objectFit: "cover" }}
+            className="object-cover"
           />
         </Box>
 

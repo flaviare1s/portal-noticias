@@ -8,6 +8,7 @@ Portal de notícias desenvolvido com Next.js, TypeScript, Material UI e Zod.
 - React 19
 - TypeScript
 - Material UI
+- Tailwind
 - Zod
 - Jest
 - React Testing Library
