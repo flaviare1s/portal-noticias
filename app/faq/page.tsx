@@ -82,7 +82,7 @@ export default function FaqPage() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails sx={{ px: 0, pb: 3 }}>
-              <Typography className="text-base text-gray-600 dark:text-gray-300">
+              <Typography className="text-base text-gray-500">
                 {item.answer}
               </Typography>
             </AccordionDetails>
