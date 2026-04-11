@@ -1,4 +1,4 @@
-import { noticias } from "@/infrastructure/data/news";
+import { CATEGORIAS_NAV, noticias } from "@/infrastructure/data/news";
 import type { News } from "@/types";
 import { NEWS_MOCK_API_URL } from "./mockUrls";
 
@@ -30,5 +30,7 @@ export const getNewsByCategory = async (category: string): Promise<News[]> => {
 
 export const getNewsCategories = async (): Promise<string[]> => {
   const allNews = await getAllNews();
-  return Array.from(new Set(allNews.map((item) => item.category)));
+  return Array.from(
+    new Set([...CATEGORIAS_NAV, ...allNews.map((item) => item.category)]),
+  );
 };

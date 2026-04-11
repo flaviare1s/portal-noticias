@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { noticias } from "@/infrastructure/data/news";
+import { CATEGORIAS_NAV, noticias } from "@/infrastructure/data/news";
 import type { News } from "@/types";
 import { getAllNews } from "@/services/news";
 
@@ -38,7 +38,9 @@ export const NewsProvider = ({ children }: { children: React.ReactNode }) => {
   }, [refreshNews]);
 
   const categories = useMemo(() => {
-    return Array.from(new Set(news.map((item) => item.category)));
+    return Array.from(
+      new Set([...CATEGORIAS_NAV, ...news.map((item) => item.category)]),
+    );
   }, [news]);
 
   return (

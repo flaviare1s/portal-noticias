@@ -40,6 +40,14 @@ describe("dynamic pages", () => {
     expect(screen.getByText(/Nenhuma not.cia encontrada/i)).toBeInTheDocument();
   });
 
+  it("calls notFound for invalid category", async () => {
+    await CategoryPage({
+      params: Promise.resolve({ category: encodeURIComponent("Categoria Inventada") }),
+    });
+
+    expect(mockNotFound).toHaveBeenCalled();
+  });
+
   it("renders news detail for valid slug", async () => {
     const page = await NewsDetailPage({
       params: Promise.resolve({ slug: "next-js-15-lancamento" }),

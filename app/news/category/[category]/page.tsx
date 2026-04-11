@@ -2,6 +2,7 @@ import { CategoryNewsSection } from "@/components/news/CategoryNewsSection";
 import { Box, Container, Typography } from "@mui/material";
 import Link from "next/link";
 import { getNewsByCategory, getNewsCategories } from "@/services/news";
+import { notFound } from "next/navigation";
 
 type CategoryPageProps = {
   params: Promise<{
@@ -17,6 +18,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     getNewsCategories(),
     getNewsByCategory(decodedCategory),
   ]);
+
+  if (!categories.includes(decodedCategory)) {
+    notFound();
+  }
 
   return (
     <Box sx={{ margin: "0 auto", px: 2, py: 3 }}>
