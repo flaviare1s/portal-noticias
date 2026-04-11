@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 export default function Loading() {
   return (
@@ -13,9 +13,6 @@ export default function Loading() {
       }}
     >
       <CircularProgress size={60} thickness={4} />
-      <Typography variant="h6" color="text.secondary">
-        Carregando...
-      </Typography>
     </Box>
   );
 }
