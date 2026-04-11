@@ -4,7 +4,7 @@ import NextLink from "next/link";
 
 const footerLinks = [
   { label: 'Home', href: '/' },
-  { label: 'News', href: '/news' },
+  { label: 'Notícias', href: '/news' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contato', href: '/contact' },
 ];
