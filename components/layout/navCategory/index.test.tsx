@@ -21,11 +21,11 @@ describe("NavCategory", () => {
 
     expect(screen.getByRole("link", { name: "Tecnologia" })).toHaveAttribute(
       "href",
-      "/news/category/Tecnologia",
+      "/news/category/tecnologia",
     );
     expect(screen.getByRole("link", { name: "Money" })).toHaveAttribute(
       "href",
-      "/news/category/Money",
+      "/news/category/money",
     );
   });
 });

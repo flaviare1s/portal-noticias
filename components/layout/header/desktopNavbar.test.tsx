@@ -32,7 +32,7 @@ describe("DesktopNavbar", () => {
     expect(screen.getByRole("link", { name: "Ao Vivo" })).toHaveAttribute("href", "/live");
     expect(screen.getByRole("link", { name: /Pol.tica/i })).toHaveAttribute(
       "href",
-      "/news/category/Política",
+      "/news/category/politica",
     );
     expect(screen.getByRole("button", { name: "account" }).closest("a")).toHaveAttribute(
       "href",

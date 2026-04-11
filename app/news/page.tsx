@@ -5,6 +5,7 @@ import Link from "next/link";
 import { NewsGrid } from "@/components/news/NewsGrid";
 import { Container, Typography, Box } from "@mui/material";
 import { useNews } from "@/contexts/NewsContext";
+import { sanitizeCategorySlug } from "@/services/categorySlug";
 
 export default function News() {
   const pathname = usePathname();
@@ -58,7 +59,7 @@ export default function News() {
           </Link>
 
           {categories.map((category) => {
-            const href = `/news/category/${encodeURIComponent(category)}`;
+            const href = `/news/category/${sanitizeCategorySlug(category)}`;
             const isActive = pathname === href;
 
             return (

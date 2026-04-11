@@ -1,8 +1,9 @@
 import { CategoryNewsSection } from "@/components/news/CategoryNewsSection";
-import { Box, Container, Typography } from "@mui/material";
-import Link from "next/link";
+import { getCategoryBySlug, sanitizeCategorySlug } from "@/services/categorySlug";
 import { getNewsByCategory, getNewsCategories } from "@/services/news";
+import { Box, Container, Typography } from "@mui/material";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 type CategoryPageProps = {
   params: Promise<{
@@ -12,16 +13,15 @@ type CategoryPageProps = {
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { category } = await params;
-  const decodedCategory = decodeURIComponent(category);
+  const categorySlug = decodeURIComponent(category);
+  const categories = await getNewsCategories();
+  const resolvedCategory = getCategoryBySlug(categories, categorySlug);
 
-  const [categories, filteredNews] = await Promise.all([
-    getNewsCategories(),
-    getNewsByCategory(decodedCategory),
-  ]);
-
-  if (!categories.includes(decodedCategory)) {
+  if (!resolvedCategory) {
     notFound();
   }
+
+  const filteredNews = await getNewsByCategory(resolvedCategory);
 
   return (
     <Box sx={{ margin: "0 auto", px: 2, py: 3 }}>
@@ -36,7 +36,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             mb: 1,
           }}
         >
-          Notícias: {decodedCategory}
+          Notícias: {resolvedCategory}
         </Typography>
         <Typography
           sx={{
@@ -45,7 +45,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             mb: 3,
           }}
         >
-          Mostrando notícias da categoria {decodedCategory}.
+          Mostrando notícias da categoria {resolvedCategory}.
         </Typography>
 
         <Box
@@ -56,12 +56,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           }}
         >
           {categories.map((cat) => {
-            const isActive = cat === decodedCategory;
+            const isActive = cat === resolvedCategory;
 
             return (
               <Link
                 key={cat}
-                href={`/news/category/${encodeURIComponent(cat)}`}
+                href={`/news/category/${sanitizeCategorySlug(cat)}`}
                 className="no-underline"
               >
                 <Box

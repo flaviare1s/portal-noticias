@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import MenuIcon from '@mui/icons-material/Menu';
-import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
+import { useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import MenuIcon from "@mui/icons-material/Menu";
+import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import { usePathname } from "next/navigation";
 import { useSearch } from "@/contexts/SearchContext";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,
   Divider,
@@ -15,22 +15,26 @@ import {
   ListItemButton,
   ListItemText,
   Stack,
-  Link as MuiLink
-} from '@mui/material';
+  Link as MuiLink,
+} from "@mui/material";
 import NextLink from "next/link";
+import { sanitizeCategorySlug } from "@/services/categorySlug";
 
 const menuItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Notícias', href: '/news' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Contato', href: '/contact' },
-  { label: 'Ao vivo', href: '/live' },
-  { label: 'Política', href: `/news/category/Política` },
-  { label: 'Money', href: `/news/category/Money` },
-  { label: 'Mundo', href: `/news/category/Mundo` },
-  { label: 'Agro', href: `/news/category/Agro` },
-  { label: 'Esportes', href: `/news/category/Esportes` },
-  { label: 'Viagem & Gastronomia', href: `/news/category/Viagem & Gastronomia` },
+  { label: "Home", href: "/" },
+  { label: "Notícias", href: "/news" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contato", href: "/contact" },
+  { label: "Ao vivo", href: "/live" },
+  { label: "Política", href: `/news/category/${sanitizeCategorySlug("Política")}` },
+  { label: "Money", href: `/news/category/${sanitizeCategorySlug("Money")}` },
+  { label: "Mundo", href: `/news/category/${sanitizeCategorySlug("Mundo")}` },
+  { label: "Agro", href: `/news/category/${sanitizeCategorySlug("Agro")}` },
+  { label: "Esportes", href: `/news/category/${sanitizeCategorySlug("Esportes")}` },
+  {
+    label: "Viagem & Gastronomia",
+    href: `/news/category/${sanitizeCategorySlug("Viagem & Gastronomia")}`,
+  },
 ];
 
 const MobileMenu = () => {
@@ -51,38 +55,35 @@ const MobileMenu = () => {
     <>
       <Stack direction="row" spacing={1} alignItems="center">
         {showSearchIcon && (
-        <IconButton
-          aria-label="search"
-          sx={{
-            color: '#FFF',
-          }}
-        >
-          <SearchIcon
-            sx={{ fontSize: 24 }}
-            onClick={() => setIsOpen(!isOpen)}
-          />
-        </IconButton>
+          <IconButton
+            aria-label="search"
+            sx={{
+              color: "#FFF",
+            }}
+          >
+            <SearchIcon
+              sx={{ fontSize: 24 }}
+              onClick={() => setIsOpen(!isOpen)}
+            />
+          </IconButton>
         )}
 
-        <MuiLink 
-          component={NextLink}
-          href='/profile'
+        <MuiLink component={NextLink} href="/profile">
+          <IconButton
+            aria-label="account"
+            sx={{
+              color: "#FFF",
+            }}
           >
-        <IconButton
-          aria-label="account"
-          sx={{
-            color: '#FFF',
-          }}
-        >
-          <PersonOutlineIcon sx={{ fontSize: 24 }} />
-        </IconButton>
+            <PersonOutlineIcon sx={{ fontSize: 24 }} />
+          </IconButton>
         </MuiLink>
 
         <IconButton
           aria-label="open menu"
           onClick={toggleDrawer(true)}
           sx={{
-            color: '#FFF',
+            color: "#FFF",
           }}
         >
           <MenuIcon sx={{ fontSize: 30 }} />
@@ -97,29 +98,29 @@ const MobileMenu = () => {
           paper: {
             sx: {
               width: 320,
-              backgroundColor: '#000',
-              color: '#FFF',
+              backgroundColor: "#000",
+              color: "#FFF",
             },
           },
         }}
       >
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
+            display: "flex",
+            justifyContent: "flex-end",
             p: 2.4,
           }}
         >
           <IconButton
             aria-label="close menu"
             onClick={toggleDrawer(false)}
-            sx={{ color: '#FFF' }}
+            sx={{ color: "#FFF" }}
           >
-            <CloseIcon sx={{  fontSize: 30 }} />
+            <CloseIcon sx={{ fontSize: 30 }} />
           </IconButton>
         </Box>
 
-        <Divider sx={{ borderColor: '#1F1F1F' }} />
+        <Divider sx={{ borderColor: "#1F1F1F" }} />
 
         <List sx={{ px: 1, py: 2 }}>
           {menuItems.map((item) => (
@@ -133,7 +134,7 @@ const MobileMenu = () => {
                 mb: 0.5,
               }}
             >
-              {item.label === 'Ao vivo' && (
+              {item.label === "Ao vivo" && (
                 <LiveTvOutlinedIcon sx={{ mr: 1.5, fontSize: 20 }} />
               )}
 
@@ -141,9 +142,13 @@ const MobileMenu = () => {
                 primary={item.label}
                 slotProps={{
                   primary: {
-                    fontSize: '1rem',
-                    fontWeight: item.label === 'Contato' ? 700 : 500,
-                    fontFamily: ['Home', 'News', 'FAQ', 'Contato'].includes(item.label) ? 'var(--font-roboto)' : undefined,
+                    fontSize: "1rem",
+                    fontWeight: item.label === "Contato" ? 700 : 500,
+                    fontFamily: ["Home", "News", "FAQ", "Contato"].includes(
+                      item.label,
+                    )
+                      ? "var(--font-roboto)"
+                      : undefined,
                   },
                 }}
               />

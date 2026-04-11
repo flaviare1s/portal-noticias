@@ -40,8 +40,8 @@ describe("Nav", () => {
     ).toBeInTheDocument();
   });
 
-  it("decodes category segments in breadcrumbs", () => {
-    mockUsePathname.mockReturnValue("/news/category/Pol%C3%ADtica");
+  it("decodes category slugs in breadcrumbs", () => {
+    mockUsePathname.mockReturnValue("/news/category/politica");
 
     render(<Nav />);
 

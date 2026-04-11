@@ -1,33 +1,34 @@
 "use client";
 
-import SearchIcon from '@mui/icons-material/Search';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
+import SearchIcon from "@mui/icons-material/Search";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import {
   Box,
   IconButton,
   Link as MuiLink,
   Stack,
-} from '@mui/material';
+} from "@mui/material";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { useSearch } from "@/contexts/SearchContext";
+import { sanitizeCategorySlug } from "@/services/categorySlug";
 
 const primaryLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Notícias', href: '/news' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Contato', href: '/contact' },
+  { label: "Home", href: "/" },
+  { label: "Notícias", href: "/news" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contato", href: "/contact" },
 ];
 
 const secondaryLinks = [
-  'Ao Vivo',
-  'Política',
-  'Money',
-  'Mundo',
-  'Agro',
-  'Esportes',
-  'Viagem & Gastronomia',
+  "Ao Vivo",
+  "Política",
+  "Money",
+  "Mundo",
+  "Agro",
+  "Esportes",
+  "Viagem & Gastronomia",
 ];
 
 const DesktopNavbar = () => {
@@ -42,20 +43,15 @@ const DesktopNavbar = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
         flex: 1,
         ml: 6,
         minWidth: 0,
       }}
     >
-      <Stack
-        direction="row"
-        spacing={3}
-        alignItems="center"
-        sx={{ mr: 4 }}
-      >
+      <Stack direction="row" spacing={3} alignItems="center" sx={{ mr: 4 }}>
         {primaryLinks.map((item) => (
           <MuiLink
             key={item.label}
@@ -64,12 +60,12 @@ const DesktopNavbar = () => {
             underline="none"
             color="inherit"
             sx={{
-              fontSize: '0.95rem',
-              fontWeight: item.label === 'Contato' ? 700 : 500,
-              fontFamily: 'var(--font-roboto)',
-              color: '#FFF',
-              transition: 'opacity 0.2s ease',
-              '&:hover': {
+              fontSize: "0.95rem",
+              fontWeight: item.label === "Contato" ? 700 : 500,
+              fontFamily: "var(--font-roboto)",
+              color: "#FFF",
+              transition: "opacity 0.2s ease",
+              "&:hover": {
                 opacity: 0.75,
               },
             }}
@@ -84,7 +80,7 @@ const DesktopNavbar = () => {
           width: 92,
           height: 16,
           borderRadius: 999,
-          backgroundColor: '#6A6A6A',
+          backgroundColor: "#6A6A6A",
           mx: 4,
           flexShrink: 0,
         }}
@@ -97,7 +93,7 @@ const DesktopNavbar = () => {
         sx={{
           mr: 3,
           minWidth: 0,
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
       >
         {secondaryLinks.map((item) => (
@@ -105,13 +101,15 @@ const DesktopNavbar = () => {
             key={item}
             sx={{
               display: "flex",
-              alignItems: 'center',
+              alignItems: "center",
               gap: 0.75,
-              whiteSpace: 'nowrap',
+              whiteSpace: "nowrap",
             }}
           >
-            {item === 'Ao Vivo' && (
-              <LiveTvOutlinedIcon sx={{ fontSize: 18, color: '#FFF', marginBottom: .3 }} />
+            {item === "Ao Vivo" && (
+              <LiveTvOutlinedIcon
+                sx={{ fontSize: 18, color: "#FFF", marginBottom: 0.3 }}
+              />
             )}
 
             <MuiLink
@@ -119,7 +117,7 @@ const DesktopNavbar = () => {
               href={
                 item === "Ao Vivo"
                   ? "/live"
-                  : `/news/category/${(item)}`
+                  : `/news/category/${sanitizeCategorySlug(item)}`
               }
               underline="none"
               sx={{
@@ -127,11 +125,11 @@ const DesktopNavbar = () => {
                   item === "Ao Vivo" && pathname === "/live"
                     ? "#E3194B"
                     : "#FFF",
-                fontSize: '0.95rem',
+                fontSize: "0.95rem",
                 fontWeight: 500,
-                fontFamily: 'roboto',
-                transition: 'opacity 0.2s ease',
-                '&:hover': {
+                fontFamily: "roboto",
+                transition: "opacity 0.2s ease",
+                "&:hover": {
                   opacity: 0.75,
                 },
               }}
@@ -148,21 +146,18 @@ const DesktopNavbar = () => {
             aria-label="search"
             onClick={() => setIsOpen(!isOpen)}
             sx={{
-              color: '#FFF',
+              color: "#FFF",
             }}
           >
             <SearchIcon />
           </IconButton>
         )}
 
-        <MuiLink 
-          component={NextLink}
-          href='/profile'
-          >
+        <MuiLink component={NextLink} href="/profile">
           <IconButton
             aria-label="account"
             sx={{
-              color: '#FFF',
+              color: "#FFF",
             }}
           >
             <PersonOutlineIcon />

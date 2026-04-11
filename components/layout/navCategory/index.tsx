@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Box, Stack, Typography } from "@mui/material";
 import { useNews } from "@/contexts/NewsContext";
+import { sanitizeCategorySlug } from "@/services/categorySlug";
 
 const NavCategory = () => {
   const { categories } = useNews();
@@ -30,7 +31,7 @@ const NavCategory = () => {
         {categories.map((category) => (
           <Link
             key={category}
-            href={`/news/category/${encodeURIComponent(category)}`}
+            href={`/news/category/${sanitizeCategorySlug(category)}`}
             className="no-underline inline-block"
           >
             <Typography

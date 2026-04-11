@@ -21,31 +21,44 @@ describe("dynamic pages", () => {
 
   it("renders category page with matching articles", async () => {
     const page = await CategoryPage({
-      params: Promise.resolve({ category: encodeURIComponent("Money") }),
+      params: Promise.resolve({ category: "money" }),
     });
 
     render(page);
 
-    expect(screen.getByRole("heading", { name: /Not.cias: Money/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Money");
     expect(screen.getByTestId("category-news-section")).toHaveTextContent("3");
   });
 
   it("renders category empty state when category has no articles", async () => {
     const page = await CategoryPage({
-      params: Promise.resolve({ category: encodeURIComponent("Infra") }),
+      params: Promise.resolve({ category: "infra" }),
     });
 
     render(page);
 
-    expect(screen.getByText(/Nenhuma not.cia encontrada/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 6 })).toHaveTextContent("Nenhuma");
   });
 
   it("calls notFound for invalid category", async () => {
     await CategoryPage({
-      params: Promise.resolve({ category: encodeURIComponent("Categoria Inventada") }),
+      params: Promise.resolve({ category: "categoria-inventada" }),
     });
 
     expect(mockNotFound).toHaveBeenCalled();
+  });
+
+  it("resolves sanitized category slug with hyphens", async () => {
+    const page = await CategoryPage({
+      params: Promise.resolve({ category: "viagem-e-gastronomia" }),
+    });
+
+    render(page);
+
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      "Viagem & Gastronomia",
+    );
+    expect(screen.getByRole("heading", { level: 6 })).toHaveTextContent("Nenhuma");
   });
 
   it("renders news detail for valid slug", async () => {

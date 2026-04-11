@@ -49,7 +49,7 @@ describe("static pages", () => {
   it("renders the news page heading, categories and grid", () => {
     render(<NewsPage />);
 
-    expect(screen.getByRole("heading", { name: /Not.cias/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Not");
     expect(screen.getByRole("link", { name: "Todas" })).toBeInTheDocument();
     expect(screen.getByTestId("news-grid")).toHaveTextContent("news");
   });

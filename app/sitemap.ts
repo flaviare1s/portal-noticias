@@ -1,10 +1,14 @@
 import type { MetadataRoute } from "next";
-import { getAllNews } from "@/services/news";
+import { sanitizeCategorySlug } from "@/services/categorySlug";
+import { getAllNews, getNewsCategories } from "@/services/news";
 
 const BASE_URL = "https://portal-noticias-i6g7.vercel.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const noticias = await getAllNews();
+  const [noticias, categories] = await Promise.all([
+    getAllNews(),
+    getNewsCategories(),
+  ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -52,16 +56,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const categorySet = new Set(noticias.map((noticia) => noticia.category));
-
-  const categoryRoutes: MetadataRoute.Sitemap = Array.from(categorySet).map(
-    (category) => ({
-      url: `${BASE_URL}/news/category/${category}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.7,
-    })
-  );
+  const categoryRoutes: MetadataRoute.Sitemap = categories.map((category) => ({
+    url: `${BASE_URL}/news/category/${sanitizeCategorySlug(category)}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
 
   return [...staticRoutes, ...categoryRoutes, ...newsRoutes];
 }
