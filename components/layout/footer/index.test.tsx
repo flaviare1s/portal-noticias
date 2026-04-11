@@ -9,7 +9,7 @@ describe("Footer", () => {
       screen.getByText(/2026 Portal de Not.cias\. Todos os direitos reservados/i),
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
-    expect(screen.getByRole("link", { name: "News" })).toHaveAttribute("href", "/news");
+    expect(screen.getByRole("link", { name: "Notícias" })).toHaveAttribute("href", "/news");
     expect(screen.getByRole("link", { name: "FAQ" })).toHaveAttribute("href", "/faq");
     expect(screen.getByRole("link", { name: "Contato" })).toHaveAttribute("href", "/contact");
   });
