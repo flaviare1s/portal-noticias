@@ -22,10 +22,15 @@ const NavCategory = () => {
           maxWidth: "1200px",
           margin: "0 auto",
           py: 1.5,
-          px: 2,
-          flexWrap: "wrap",
-          columnGap: 3,
-          rowGap: 1,
+          px: { xs: 2, md: 2 },
+          flexWrap: { xs: "nowrap", md: "wrap" },
+          gap: { xs: 2, md: 3 },
+          overflowX: { xs: "auto", md: "visible" },
+          overscrollBehaviorX: "contain",
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
         }}
       >
         {categories.map((category) => (
@@ -37,13 +42,14 @@ const NavCategory = () => {
             <Typography
               component="span"
               sx={{
-                fontSize: "0.8rem",
+                fontSize: { xs: "0.78rem", md: "0.8rem" },
                 fontWeight: 700,
                 textTransform: "uppercase",
                 color: "#6B6B6B",
                 letterSpacing: 0.5,
                 transition: "color 0.2s ease",
                 whiteSpace: "nowrap",
+                flexShrink: 0,
                 "&:hover": {
                   color: "#1F1F1F",
                 },

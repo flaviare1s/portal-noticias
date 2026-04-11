@@ -52,7 +52,16 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           sx={{
             display: "flex",
             gap: 1,
-            flexWrap: "wrap",
+            flexWrap: { xs: "nowrap", md: "wrap" },
+            overflowX: { xs: "auto", md: "visible" },
+            overscrollBehaviorX: "contain",
+            pb: 1,
+            mx: { xs: -2, md: 0 },
+            px: { xs: 2, md: 0 },
+            scrollbarWidth: "none",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
           }}
         >
           {categories.map((cat) => {
@@ -66,10 +75,16 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               >
                 <Box
                   sx={{
-                    px: 2,
+                    px: { xs: 1.75, md: 2 },
                     py: 0.8,
+                    minHeight: 38,
                     borderRadius: "999px",
-                    fontSize: "0.85rem",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    whiteSpace: "nowrap",
+                    fontSize: { xs: "0.78rem", md: "0.85rem" },
                     fontWeight: 600,
                     backgroundColor: isActive ? "#E3194B" : "transparent",
                     color: isActive ? "#FFFFFF" : "#E3194B",
