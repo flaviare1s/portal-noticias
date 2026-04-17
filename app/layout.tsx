@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import NavCategory from "@/components/layout/navCategory";
 import NavWrapper from "@/components/layout/navWrapper";
+import MockServiceWorkerProvider from "@/components/providers/MockServiceWorkerProvider";
 import { NewsProvider } from "@/contexts/NewsContext";
 import { NotFoundProvider } from "@/contexts/NotFoundContext";
 import "./globals.css";
@@ -43,27 +44,29 @@ export default function RootLayout({
       >
         <CssBaseline />
         <NotFoundProvider>
-          <NewsProvider>
-            <SearchProvider>
-              <div className="flex-1 bg-[#ECECEC]">
-                <Header />
-                <SearchBar />
-                <NavCategory />
-                <NavWrapper />
-                <main className="flex-1">
-                  <Box
-                    component="section"
-                    sx={{
-                      width: "100%",
-                      py: 1,
-                    }}
-                  >
-                    {children}
-                  </Box>
-                </main>
-              </div>
-            </SearchProvider>
-          </NewsProvider>
+          <MockServiceWorkerProvider>
+            <NewsProvider>
+              <SearchProvider>
+                <div className="flex-1 bg-[#ECECEC]">
+                  <Header />
+                  <SearchBar />
+                  <NavCategory />
+                  <NavWrapper />
+                  <main className="flex-1">
+                    <Box
+                      component="section"
+                      sx={{
+                        width: "100%",
+                        py: 1,
+                      }}
+                    >
+                      {children}
+                    </Box>
+                  </main>
+                </div>
+              </SearchProvider>
+            </NewsProvider>
+          </MockServiceWorkerProvider>
         </NotFoundProvider>
 
         <Footer />
