@@ -176,14 +176,14 @@ coverage/lcov-report/index.html
 
 Cobertura atual:
 
-- Statements: `100%`
-- Branches: `94.7%`
-- Functions: `93.93%`
-- Lines: `100%`
+- Statements: `99.96%`
+- Branches: `94.3%`
+- Functions: `94.44%`
+- Lines: `99.96%`
 
 ### Screenshot do coverage
 
-<img width="1091" height="868" alt="coverage" src="https://github.com/user-attachments/assets/24816d42-964a-4640-b6ed-57385e0039bb" />
+<img width="1168" height="932" alt="coverage" src="https://github.com/user-attachments/assets/61451362-e571-45b2-b84d-72104898e41c" />
 
 ## Funcionalidades
 
