@@ -2,35 +2,14 @@ import { CATEGORIAS_NAV, noticias } from "@/infrastructure/data/news";
 import type { News } from "@/types";
 import { NEWS_MOCK_API_URL } from "./mockUrls";
 
-const getNewsApiUrl = () => {
-  if (typeof window !== "undefined") {
-    return NEWS_MOCK_API_URL;
-  }
-
-  if (process.env.NODE_ENV === "test") {
-    return `http://localhost${NEWS_MOCK_API_URL}`;
-  }
-
-  const deploymentUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    process.env.SITE_URL ??
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
-
-  return deploymentUrl ? new URL(NEWS_MOCK_API_URL, deploymentUrl).toString() : null;
-};
-
 const fetchNews = async (): Promise<News[]> => {
-  const apiUrl = getNewsApiUrl();
-
-  if (!apiUrl) {
+  // During SSR/build we read from the in-memory data source directly
+  // to avoid internal HTTP calls while prerendering.
+  if (typeof window === "undefined" || process.env.NODE_ENV === "test") {
     return noticias;
   }
 
-  if (process.env.NODE_ENV === "test" && typeof fetch !== "function") {
-    return noticias;
-  }
-
-  const response = await fetch(apiUrl, {
+  const response = await fetch(NEWS_MOCK_API_URL, {
     next: {
       revalidate: 3600,
     },
